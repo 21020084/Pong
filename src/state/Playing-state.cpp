@@ -1,8 +1,8 @@
 #include "Playing-state.h"
 
 namespace pong {
-  void PlayingState::init() {}
-  void PlayingState::handleInput(sf::Event &event) {}
+  int PlayingState::init() {}
+  void PlayingState::handleInput() {}
   void PlayingState::update(float timeElapsed) {}
-  void PlayingState::draw(sf::RenderWindow &window) {}
+  void PlayingState::render() {}
 }
