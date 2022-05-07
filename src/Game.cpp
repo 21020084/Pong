@@ -19,7 +19,7 @@ namespace pong {
 
     /// The main game loop
     while (this->data->window.isOpen()) {
-      if (this->data->stateManager.changeState() < 0) {
+      if (this->data->stateManager.processStateChange() < 0) {
         this->data->window.close();
         break;
       }

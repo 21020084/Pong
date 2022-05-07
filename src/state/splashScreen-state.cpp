@@ -2,10 +2,6 @@
 #include "Menu-state.h"
 
 namespace pong {
-  bool SplashscreenState::hasExited() {
-    return this->m_hasExited;
-  }
-
   SplashscreenState::SplashscreenState(GameDataRef _data) : data(_data) {}
 
   int SplashscreenState::init() {
@@ -25,7 +21,7 @@ namespace pong {
       /// If the user wants to quit the game
       if (event.type == sf::Event::Closed ||
           sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-        this->m_hasExited  = true;
+        this->m_hasClosed  = true;
         this->data->window.close();
       }
     }
@@ -34,7 +30,7 @@ namespace pong {
   void SplashscreenState::update(float timeElapsed) {
     if (this->clock.getElapsedTime().asSeconds() > SPLASH_STATE_SHOW_TIME) {
       this->data->stateManager.addState(new MenuState(this->data));
-      this->m_hasExited = true;
+      this->m_hasClosed = true;
     } else {
       this->sprite.setColor(sf::Color(255, 255, 255,
                             255 - (this->clock.getElapsedTime().asSeconds() * 255 / SPLASH_STATE_SHOW_TIME)));

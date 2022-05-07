@@ -6,10 +6,10 @@
 namespace pong  {
   class PlayingState : public GameState {
     public:
-      void init() override;
-      void handleInput(sf::Event &event) override;
+      int init() override;
+      void handleInput() override;
       void update(float timeElapsed) override;
-      void draw(sf::RenderWindow &window) override;
+      void render() override;
   };
 }
 

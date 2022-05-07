@@ -9,7 +9,7 @@ namespace pong {
     public:
       StateManager() = default;
       ~StateManager() = default;
-      int changeState();
+      int processStateChange();
       void addState(GameState *state);
       void handleInput();
       void update(float elapsedTime);
@@ -17,7 +17,7 @@ namespace pong {
       // bool empty();
     private:
       std::stack<GameState *> states;
-      GameState *currentState = nullptr;
+      GameState *newState;
   };
 }
  

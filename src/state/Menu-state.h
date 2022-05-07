@@ -13,7 +13,6 @@ namespace pong {
       void handleInput() override;
       void update(float timeElapsed) override;
       void render() override;
-      bool hasExited() override;
     private:
       GameDataRef data;
       sf::Texture m_backgroundTexture;

@@ -3,11 +3,6 @@
 namespace pong {
   MenuState::MenuState(GameDataRef _data) : data(_data) {}
 
-  bool MenuState::hasExited() {
-    return this->m_hasExited;
-  }
-
-
   int MenuState::init() {
     if (!m_backgroundTexture.loadFromFile("assets/m_background.png")) {
       std::cout << "Error loading menu background" << std::endl;
@@ -31,9 +26,9 @@ namespace pong {
 
   void MenuState::render() {
     data->window.draw(m_backgroundSprite);
-    data->window.draw(onePlayerSprite);
-    data->window.draw(twoPlayerSprite);
-    data->window.draw(exitSprite);
+    // data->window.draw(onePlayerSprite);
+    // data->window.draw(twoPlayerSprite);
+    // data->window.draw(exitSprite);
     data->window.display();
   }
 }

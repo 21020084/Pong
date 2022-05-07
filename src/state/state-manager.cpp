@@ -1,38 +1,39 @@
 #include "state-manager.h"
 
 namespace pong {
-  int StateManager::changeState() {
+  int StateManager::processStateChange() {
     if (this->states.empty()) {
       return -1;
     }
-
-    if (currentState->hasExited()) {
+    if (this->states.top()->hasClosed()) {
+      delete this->states.top();
       this->states.pop();
-      delete currentState;
-      currentState = this->states.top();
     }
-
-    int Init = this->currentState->init();
-    return Init;
+    if (!this->newState->hasEntered()) {
+      if (this->newState->init() != 0) {
+        return -1;
+      }
+      this->newState->enter();
+      this->states.push(this->newState);
+    }
+    return 0;
   }
 
   void StateManager::addState(GameState *state) {
-    this->states.push(state);
+    this->newState = state;
+    this->newState->setNewState();
   }
 
   void StateManager::handleInput() {
-    if (currentState->hasExited()) return;
-    this->currentState->handleInput();
+    this->states.top()->handleInput();
   }
 
   void StateManager::update(float elapsedTime) {
-    if (currentState->hasExited()) return;
-    this->currentState->update(elapsedTime);
+    this->states.top()->update(elapsedTime);
   }
 
   void StateManager::render(float interpolation) {
-    if (currentState->hasExited()) return;
-    this->currentState->render();
+    this->states.top()->render();
   }
 
 } // namespace pong

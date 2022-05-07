@@ -14,14 +14,18 @@ namespace pong {
       virtual void handleInput() = 0;
       virtual void update(float elapsedTime) = 0;
       virtual void render() = 0;
-      virtual bool hasExited() = 0;
+      bool hasEntered();
+      bool hasClosed();
+      void setNewState();
+      void enter();
       // virtual void endLoopLogic() {};
 
       // VisibleObjectManager* getObjectManager();
 
     protected:
       // VisibleObjectManager visibleObjectManager;
-      bool m_hasExited;
+      bool m_hasEntered;
+      bool m_hasClosed;
   };
 }
 
