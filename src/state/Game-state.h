@@ -2,6 +2,7 @@
 #define GAME_GAMESTATE_H
 
 #include <iostream>
+#include <memory>
 #include <SFML/Graphics.hpp>
 #include "../objects/visible-object-manager.h"
 
@@ -14,9 +15,12 @@ namespace pong {
     GameOver
   };
 
+  struct GameData;
+  typedef std::shared_ptr<GameData> GameDataRef;
+
   class GameState {
     public:
-      GameState() = default;
+      GameState(GameDataRef _data);
       virtual ~GameState() = default;
       virtual int init() = 0;
       virtual void handleInput() = 0;
@@ -32,6 +36,7 @@ namespace pong {
 
     protected:
       // VisibleObjectManager visibleObjectManager;
+      GameDataRef data;
       bool m_hasEntered;
       bool m_hasClosed;
   };

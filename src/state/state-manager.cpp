@@ -1,3 +1,4 @@
+#include "../Game.h"
 #include "state-manager.h"
 #include "Menu-state.h"
 #include "splashScreen-state.h"
@@ -7,11 +8,12 @@ namespace pong {
     this->newStateID = SplashScreen;
   }
 
+  void StateManager::init() {
+    this->addState(SplashScreen);
+  }
+
   int StateManager::processStateChange() {
-    if (this->states.empty()) {
-      return -1;
-    }
-    if (this->states.top()->hasClosed()) {
+    if (!this->states.empty() && this->states.top()->hasClosed()) {
       delete this->states.top();
       this->states.pop();
     }
@@ -30,15 +32,22 @@ namespace pong {
       case SplashScreen:
         this->newState = new SplashScreenState(Game::data);
         break;
+
       case Menu:
+        if (this->newStateID == Menu) {
+          break;
+        }
         this->newState = new MenuState(Game::data);
         break;
+
       case OnePlayer:
         // this->newState = new OnePlayerState();
         break;
+
       case TwoPlayer:
         // this->newState = new TwoPlayerState();
         break;
+        
       case GameOver:
         // this->newState = new GameOverState();
         break;

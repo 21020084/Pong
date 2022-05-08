@@ -1,14 +1,16 @@
 #ifndef STATE_STATE_MANAGER_H
 #define STATE_STATE_MANAGER_H
 
-#include "Game-state.h"
 #include <stack>
+#include "Game-state.h"
 
 namespace pong {
+  
   class StateManager {
     public:
       StateManager();
       ~StateManager() = default;
+      void init();
       int processStateChange();
       void addState(StateID stateID);
       void handleInput();

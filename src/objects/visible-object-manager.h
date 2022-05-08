@@ -10,9 +10,9 @@ namespace pong {
       VisibleObjectManager();
       ~VisibleObjectManager();
       void init();
-      void handleInput(sf::Event &event);
+      void handleInput();
       void update(float elapsedTime);
-      void draw(sf::RenderWindow &window);
+      void draw();
       void addObject(VisibleObject *object);
       void removeObject(VisibleObject *object);
       void clearObjects();

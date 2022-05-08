@@ -2,16 +2,22 @@
 #define GAME_VISIBLEOBJECT_H
 
 #include <iostream>
+#include <memory>
 #include <SFML/Graphics.hpp>
+// #include "../Game.h"
 
 namespace pong {
+
+  struct GameData;
+  typedef std::shared_ptr<GameData> GameDataRef;
+
   class VisibleObject {
     public:
       VisibleObject(std::string textureFilename);
       virtual ~VisibleObject();
-      virtual void handleInput(sf::Event &event) = 0;
+      virtual void handleInput() = 0;
       virtual void update(float elapsedTime) = 0;
-      virtual void draw(sf::RenderWindow &window) = 0;
+      virtual void draw() = 0;
       virtual sf::Vector2f getPosition();
       virtual void setPosition(float x, float y);
       virtual void move(float x, float y);
@@ -54,6 +60,7 @@ namespace pong {
       // virtual void setTextureAlpha(float alpha);
       // virtual float getTextureAlpha();
     private:
+      GameDataRef data;
       sf::Sprite sprite;
       sf::Texture texture;
       bool isLoaded;  

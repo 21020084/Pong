@@ -1,42 +1,43 @@
+#include "../Game.h"
 #include "visible-object.h"
 
 namespace pong {
   VisibleObject::VisibleObject(std::string textureFilename) {
-    isLoaded = false;
-    if (!texture.loadFromFile(textureFilename)) {
+    this->isLoaded = false;
+    if (!this->texture.loadFromFile(textureFilename)) {
       std::cout << "Error loading texture: " << textureFilename << std::endl;
     } else {
-      isLoaded = true;
+      this->isLoaded = true;
     }
-    sprite.setTexture(texture);
+    this->sprite.setTexture(this->texture);
   }
 
   VisibleObject::~VisibleObject() {
     // std::cout << "Destroying VisibleObject" << std::endl;
   }
 
-  void VisibleObject::draw(sf::RenderWindow &window) {
+  void VisibleObject::draw() {
     if (!this->isLoaded) return;
-    window.draw(sprite);
+    this->data->window.draw(this->sprite);
   }
 
   void VisibleObject::move(float x, float y) {
     if (!this->isLoaded) return;
-    sprite.move(x, y);
+    this->sprite.move(x, y);
   }
 
   void VisibleObject::setPosition(float x, float y) {
     if (!this->isLoaded) return;
-    sprite.setPosition(x, y);
+    this->sprite.setPosition(x, y);
   }
 
   sf::Vector2f VisibleObject::getPosition() {
     if (!this->isLoaded) return sf::Vector2f(0, 0);
-    return sprite.getPosition();
+    return this->sprite.getPosition();
   }
 
   sf::Rect<float> VisibleObject::getBoundingBox() {
-    return sprite.getGlobalBounds();
+    return this->sprite.getGlobalBounds();
   }
 
   float VisibleObject::getTop() {

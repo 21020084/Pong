@@ -2,9 +2,13 @@
 #define MENU_STATE_H
 
 #include "Game-state.h"
-#include "../Game.h"
+// #include "../Game.h"
 
 namespace pong {
+
+  struct GameData;
+  typedef std::shared_ptr<GameData> GameDataRef;
+
   class MenuState : public GameState {
     public:
       MenuState(GameDataRef _data);
@@ -14,7 +18,6 @@ namespace pong {
       void update(float timeElapsed) override;
       void render() override;
     private:
-      GameDataRef data;
       sf::Texture m_backgroundTexture;
       sf::Sprite m_backgroundSprite;
       sf::Texture onePlayerTexture;

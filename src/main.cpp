@@ -4,6 +4,6 @@ int main()
 {
   freopen("log.txt", "w", stdout) ;
   srand(time(nullptr));
-  pong::Game(800, 600, "Pong");  
+  pong::Game::run();
   return 0;
 }

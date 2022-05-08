@@ -1,6 +1,8 @@
 #include "Game-state.h"
 
 namespace pong {
+  GameState::GameState(GameDataRef _data) : data(_data) {}
+
   bool GameState::hasEntered() {
     return this->m_hasEntered;
   }
