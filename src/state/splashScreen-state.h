@@ -8,15 +8,15 @@
 #include "../Game.h"
 
 namespace pong {
-  class SplashscreenState : public GameState {
+  class SplashScreenState : public GameState {
     public:
-      SplashscreenState(GameDataRef _data);
+      SplashScreenState(GameDataRef _data);
 
       int init() override;
       void handleInput() override;
       void update(float timeElapsed) override;
       void render() override;
-      
+
     private:
       GameDataRef data;
       sf::Sprite sprite;

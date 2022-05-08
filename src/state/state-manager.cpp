@@ -1,6 +1,12 @@
 #include "state-manager.h"
+#include "Menu-state.h"
+#include "splashScreen-state.h"
 
 namespace pong {
+  StateManager::StateManager() {
+    this->newStateID = SplashScreen;
+  }
+
   int StateManager::processStateChange() {
     if (this->states.empty()) {
       return -1;
@@ -19,8 +25,24 @@ namespace pong {
     return 0;
   }
 
-  void StateManager::addState(GameState *state) {
-    this->newState = state;
+  void StateManager::addState(StateID stateID) {
+    switch (stateID) {
+      case SplashScreen:
+        this->newState = new SplashScreenState(Game::data);
+        break;
+      case Menu:
+        this->newState = new MenuState(Game::data);
+        break;
+      case OnePlayer:
+        // this->newState = new OnePlayerState();
+        break;
+      case TwoPlayer:
+        // this->newState = new TwoPlayerState();
+        break;
+      case GameOver:
+        // this->newState = new GameOverState();
+        break;
+    }
     this->newState->setNewState();
   }
 

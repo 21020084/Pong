@@ -1,16 +1,16 @@
 #run the application
-run: bin/second.exe
-	bin/second
+run: bin/pong.exe
+	bin/pong
 
 #create the executable file
-bin/second.exe: obj/main.o obj/Game.o obj/state-manager.o obj/Game-state.o obj/splashScreen-state.o obj/Menu-state.o
+bin/pong.exe: obj/main.o obj/Game.o obj/state-manager.o obj/Game-state.o obj/splashScreen-state.o obj/Menu-state.o
 	g++ obj/main.o \
       obj/Game.o \
       obj/state-manager.o \
 			obj/Game-state.o \
       obj/splashScreen-state.o \
 			obj/Menu-state.o \
-  -o bin/second.exe \
+  -o bin/pong.exe \
   -LD:/SFML-2.5.1/lib -lsfml-graphics -lsfml-window -lsfml-system -lsfml-network -lsfml-audio
 
 #compile 'main'
@@ -36,3 +36,15 @@ obj/splashScreen-state.o: src/state/splashScreen-state.cpp src/state/splashScree
 #compile 'Menu-state'
 obj/Menu-state.o: src/state/Menu-state.cpp src/state/Menu-state.h
 	g++ -c src/state/Menu-state.cpp -o obj/Menu-state.o -ID:/SFML-2.5.1/include -g
+
+#update Game.h
+src/Game.h: src/state/state-manager.h
+	touch src/Game.h
+
+#update state-manager.cpp
+src/state/state-manager.cpp: src/state/splashScreen-state.h src/state/Menu-state.h
+	touch src/state/state-manager.cpp
+
+#update state-manager.h
+src/state/state-manager.h: src/state/Game-state.h
+	touch src/state/state-manager.h 

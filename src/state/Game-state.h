@@ -6,9 +6,17 @@
 #include "../objects/visible-object-manager.h"
 
 namespace pong {
+  enum StateID {
+    SplashScreen,
+    Menu,
+    OnePlayer,
+    TwoPlayer,
+    GameOver
+  };
+
   class GameState {
     public:
-      GameState();
+      GameState() = default;
       virtual ~GameState() = default;
       virtual int init() = 0;
       virtual void handleInput() = 0;

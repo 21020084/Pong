@@ -1,10 +1,9 @@
 #include "splashScreen-state.h"
-#include "Menu-state.h"
 
 namespace pong {
-  SplashscreenState::SplashscreenState(GameDataRef _data) : data(_data) {}
+  SplashScreenState::SplashScreenState(GameDataRef _data) : data(_data) {}
 
-  int SplashscreenState::init() {
+  int SplashScreenState::init() {
     sf::Texture texture;
     if (!texture.loadFromFile(SPLASH_SCENE_BACKGROUND_FILEPATH)) {
       std::cout << "Error loading splashScreen.png" << std::endl;
@@ -14,7 +13,7 @@ namespace pong {
     return 0;
   }
 
-  void SplashscreenState::handleInput() {
+  void SplashScreenState::handleInput() {
     /// Check if the user want to quit the game
     sf::Event event;
     while (data->window.pollEvent(event)) {
@@ -27,9 +26,9 @@ namespace pong {
     }
   }
 
-  void SplashscreenState::update(float timeElapsed) {
+  void SplashScreenState::update(float timeElapsed) {
     if (this->clock.getElapsedTime().asSeconds() > SPLASH_STATE_SHOW_TIME) {
-      this->data->stateManager.addState(new MenuState(this->data));
+      this->data->stateManager.addState(Menu);
       this->m_hasClosed = true;
     } else {
       this->sprite.setColor(sf::Color(255, 255, 255,
@@ -37,7 +36,7 @@ namespace pong {
     }
   }
 
-  void SplashscreenState::render() {
+  void SplashScreenState::render() {
     this->data->window.draw(this->sprite);
     this->data->window.display();
   }

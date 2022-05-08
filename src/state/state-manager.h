@@ -7,10 +7,10 @@
 namespace pong {
   class StateManager {
     public:
-      StateManager() = default;
+      StateManager();
       ~StateManager() = default;
       int processStateChange();
-      void addState(GameState *state);
+      void addState(StateID stateID);
       void handleInput();
       void update(float elapsedTime);
       void render(float interpolation);
@@ -18,6 +18,7 @@ namespace pong {
     private:
       std::stack<GameState *> states;
       GameState *newState;
+      StateID newStateID;
   };
 }
  

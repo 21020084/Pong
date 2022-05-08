@@ -19,10 +19,10 @@ namespace pong {
   class Game {
     public:
       Game(const int width, const int height, const std::string title);
+      static GameDataRef data;
       void run();
 
     private:
-      GameDataRef data = std::make_shared<GameData>();
       // Updates run at 60 per second.
 		  static constexpr float dt = 1.0f / 60.0f;
       static sf::Clock clock;

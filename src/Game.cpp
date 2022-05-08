@@ -1,5 +1,4 @@
 #include "Game.h"
-#include "state/splashScreen-state.h"
 
 namespace pong {
   Game::Game(const int width, const int height, const std::string title) {
@@ -9,13 +8,15 @@ namespace pong {
     this->run();
   }
 
+  GameDataRef Game::data = std::make_shared<GameData>();
+
   void Game::run() {
     float newTime, frameTime, interpolation;
     float currentTime = data->clock.getElapsedTime().asSeconds();
     float accumulator = 0.0f;
 
     /// Start the game with the splash screen.
-    this->data->stateManager.addState(new SplashscreenState(this->data));
+    this->data->stateManager.addState(SplashScreen);
 
     /// The main game loop
     while (this->data->window.isOpen()) {
