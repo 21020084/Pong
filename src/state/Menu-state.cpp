@@ -11,15 +11,9 @@ namespace pong {
     }
     m_backgroundSprite.setTexture(m_backgroundTexture);
 
-    // if (!onePlayerTexture.loadFromFile("assets/one_player.png")) {
-    //   std::cout << "Error loading one player button" << std::endl;
-    //   return -1;
-    // }
+    /// TODO: Add buttons to the menu
+    
 
-    // if (!twoPlayerTexture.loadFromFile("assets/two_player.png")) {
-    //   std::cout << "Error loading two player button" << std::endl;
-    //   return -1;
-    // }
     return 0;
   }
 

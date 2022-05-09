@@ -2,8 +2,7 @@
 #include "../Game.h"
 
 namespace pong {
-  SplashScreenState::SplashScreenState(GameDataRef _data) : GameState(_data) 
-  {}
+  SplashScreenState::SplashScreenState(GameDataRef _data) : GameState(_data) {}
 
   int SplashScreenState::init() {
     if (!this->texture.loadFromFile(SPLASH_SCENE_BACKGROUND_FILEPATH)) {

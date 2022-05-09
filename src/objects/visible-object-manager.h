@@ -3,12 +3,13 @@
 
 #include "visible-object.h"
 #include <SFML/Graphics.hpp>
+#include <vector>
 
 namespace pong {
   class VisibleObjectManager {
     public:
-      VisibleObjectManager();
-      ~VisibleObjectManager();
+      VisibleObjectManager() = default;
+      ~VisibleObjectManager() = default;
       void init();
       void handleInput();
       void update(float elapsedTime);

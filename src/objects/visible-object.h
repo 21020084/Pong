@@ -4,7 +4,6 @@
 #include <iostream>
 #include <memory>
 #include <SFML/Graphics.hpp>
-// #include "../Game.h"
 
 namespace pong {
 
@@ -13,7 +12,8 @@ namespace pong {
 
   class VisibleObject {
     public:
-      VisibleObject(std::string textureFilename);
+      VisibleObject(GameDataRef _data);
+      virtual void loadTexture(std::string textureFilename);
       virtual ~VisibleObject();
       virtual void handleInput() = 0;
       virtual void update(float elapsedTime) = 0;
@@ -21,6 +21,7 @@ namespace pong {
       virtual sf::Vector2f getPosition();
       virtual void setPosition(float x, float y);
       virtual void move(float x, float y);
+      virtual void collideWith(VisibleObject *target) {};
 
       virtual sf::Rect<float> getBoundingBox();
       virtual float getTop();
@@ -59,7 +60,7 @@ namespace pong {
       // virtual sf::Color getTextureColor();
       // virtual void setTextureAlpha(float alpha);
       // virtual float getTextureAlpha();
-    private:
+    protected:
       GameDataRef data;
       sf::Sprite sprite;
       sf::Texture texture;

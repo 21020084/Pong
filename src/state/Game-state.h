@@ -1,7 +1,6 @@
 #ifndef GAME_GAMESTATE_H
 #define GAME_GAMESTATE_H
 
-#include <iostream>
 #include <memory>
 #include <SFML/Graphics.hpp>
 #include "../objects/visible-object-manager.h"
@@ -12,7 +11,8 @@ namespace pong {
     Menu,
     OnePlayer,
     TwoPlayer,
-    GameOver
+    GameOver,
+    Exiting
   };
 
   struct GameData;

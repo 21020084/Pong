@@ -11,7 +11,7 @@ namespace pong {
     sf::RenderWindow window;
     sf::Clock clock; 
     StateManager stateManager;
-    // VisibleObjectManager visibleObjectManager;
+    VisibleObjectManager visibleObjectManager;
   };
 
   typedef std::shared_ptr<GameData> GameDataRef;
