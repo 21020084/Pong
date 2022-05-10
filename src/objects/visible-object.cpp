@@ -1,21 +1,24 @@
+#include <iostream>
 #include "../Game.h"
 #include "visible-object.h"
 
 namespace pong {
-  VisibleObject::VisibleObject(GameDataRef _data) : data(_data) {};
+  VisibleObject::VisibleObject(std::string textureFilename, GameDataRef _data) : data(_data) {
+    this->loadTexture(textureFilename);
+  };
+
+  // VisibleObject::VisibleObject(std::string textureFilename) {
+  //   this->loadTexture(textureFilename);
+  // }
 
   void VisibleObject::loadTexture(std::string textureFilename) {
     this->isLoaded = false;
     if (!this->texture.loadFromFile(textureFilename)) {
       std::cout << "Error loading texture: " << textureFilename << std::endl;
-    } else {
-      this->isLoaded = true;
-    }
+      return;
+    } 
+    this->isLoaded = true;
     this->sprite.setTexture(this->texture);
-  }
-
-  VisibleObject::~VisibleObject() {
-    // std::cout << "Destroying VisibleObject" << std::endl;
   }
 
   void VisibleObject::draw() {

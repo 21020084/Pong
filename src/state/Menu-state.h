@@ -2,12 +2,8 @@
 #define MENU_STATE_H
 
 #include "Game-state.h"
-// #include "../Game.h"
 
 namespace pong {
-
-  struct GameData;
-  typedef std::shared_ptr<GameData> GameDataRef;
 
   class MenuState : public GameState {
     public:

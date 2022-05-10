@@ -9,9 +9,6 @@
 
 namespace pong {
 
-  struct GameData;
-  typedef std::shared_ptr<GameData> GameDataRef;
-
   class SplashScreenState : public GameState {
     public:
       SplashScreenState(GameDataRef _data);

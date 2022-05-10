@@ -1,9 +1,9 @@
 #ifndef GAME_GAMESTATE_H
 #define GAME_GAMESTATE_H
 
+#include <iostream>
 #include <memory>
 #include <SFML/Graphics.hpp>
-#include "../objects/visible-object-manager.h"
 
 namespace pong {
   enum StateID {
@@ -32,10 +32,7 @@ namespace pong {
       void enter();
       // virtual void endLoopLogic() {};
 
-      // VisibleObjectManager* getObjectManager();
-
     protected:
-      // VisibleObjectManager visibleObjectManager;
       GameDataRef data;
       bool m_hasEntered;
       bool m_hasClosed;

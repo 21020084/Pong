@@ -1,7 +1,6 @@
 #ifndef GAME_VISIBLEOBJECT_H
 #define GAME_VISIBLEOBJECT_H
 
-#include <iostream>
 #include <memory>
 #include <SFML/Graphics.hpp>
 
@@ -12,10 +11,12 @@ namespace pong {
 
   class VisibleObject {
     public:
-      VisibleObject(GameDataRef _data);
+      VisibleObject(std::string textureFilename, GameDataRef _data);
+      // VisibleObject(std::string textureFilename);
+      virtual ~VisibleObject() = 0;
+
       virtual void loadTexture(std::string textureFilename);
-      virtual ~VisibleObject();
-      virtual void handleInput() = 0;
+      virtual void handleInput(sf::Event &event) = 0;
       virtual void update(float elapsedTime) = 0;
       virtual void draw() = 0;
       virtual sf::Vector2f getPosition();

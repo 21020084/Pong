@@ -22,9 +22,6 @@ namespace pong {
       static void run();
 
     private:
-      static constexpr int SCREEN_HEIGHT = 940;
-      static constexpr int SCREEN_WIDTH = 1406;
-      static std::string SCREEN_TITLE;
       // Updates run at 60 per second.
 		  static constexpr float dt = 1.0f / 60.0f;
       static sf::Clock clock;

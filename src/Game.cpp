@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "DEFINITION.h"
 
 namespace pong {
   GameDataRef Game::data = std::make_shared<GameData>();

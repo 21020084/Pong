@@ -2,25 +2,23 @@
 #define GAME_VISIBLE_OBJECT_MANAGER_H
 
 #include "visible-object.h"
-#include <SFML/Graphics.hpp>
-#include <vector>
+#include <map>
 
 namespace pong {
   class VisibleObjectManager {
     public:
       VisibleObjectManager() = default;
       ~VisibleObjectManager() = default;
-      void init();
-      void handleInput();
+      void handleInput(sf::Event &event);
       void update(float elapsedTime);
       void draw();
-      void addObject(VisibleObject *object);
-      void removeObject(VisibleObject *object);
+      void addObject(std::string name, VisibleObject *object);
+      void removeObject(std::string name);
       void clearObjects();
-      VisibleObject *getObject(int index);
+      VisibleObject *getObject(std::string name);
       int getObjectCount();
     private:
-      std::vector<VisibleObject *> objects;
+      std::map<std::string, VisibleObject *> objects;
   };
 }
 
