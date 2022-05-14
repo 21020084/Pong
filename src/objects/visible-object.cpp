@@ -3,13 +3,15 @@
 #include "visible-object.h"
 
 namespace pong {
+  sf::Cursor::Type VisibleObject::CursorType = sf::Cursor::Arrow;
+
   VisibleObject::VisibleObject(std::string textureFilename, GameDataRef _data) : data(_data) {
     this->loadTexture(textureFilename);
   };
 
-  // VisibleObject::VisibleObject(std::string textureFilename) {
-  //   this->loadTexture(textureFilename);
-  // }
+  VisibleObject::VisibleObject(std::string textureFilename) {
+    this->loadTexture(textureFilename);
+  }
 
   void VisibleObject::loadTexture(std::string textureFilename) {
     this->isLoaded = false;

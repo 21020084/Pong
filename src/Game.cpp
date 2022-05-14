@@ -34,6 +34,9 @@ namespace pong {
 
       while (accumulator >= dt) {
         data->stateManager.handleInput();
+        if (!data->window.isOpen()) {
+          break;
+        }
         data->stateManager.update(dt);
         accumulator -= dt;
       }

@@ -7,11 +7,9 @@ namespace pong {
 
   class Field : public VisibleObject {
     public:
-      Field(std::string textureFilename, GameDataRef _data);
-      void handleInput(sf::Event &event) override;
+      Field(GameDataRef _data);
+      void handleInput(sf::Event &event) override {}
       void update(float elapsedTime) override {}
-      void draw() override;
-
   };
 }
 

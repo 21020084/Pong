@@ -1,16 +1,17 @@
-#ifndef EXIT_BUTTON_H
-#define EXIT_BUTTON_H
+#ifndef ONE_PLAYER_BUTTON
+#define ONE_PLAYER_BUTTON
 
 #include "../visible-object.h"
 
 namespace pong { 
 
-  class ExitButton : public VisibleObject {
+  class OnePlayerButton : public VisibleObject {
     public:
-      ExitButton(GameDataRef _data);
+      OnePlayerButton(GameDataRef _data);
       void handleInput(sf::Event &event) override;
       void update(float elapsedTime) override {}
   };
 }
 
-#endif // EXIT_BUTTON_H
+
+#endif // ONE_PLAYER_BUTTON

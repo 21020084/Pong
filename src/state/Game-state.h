@@ -4,6 +4,7 @@
 #include <iostream>
 #include <memory>
 #include <SFML/Graphics.hpp>
+#include "../objects/visible-object-manager.h"
 
 namespace pong {
   enum StateID {

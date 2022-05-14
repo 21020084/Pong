@@ -2,11 +2,5 @@
 #include "../../Game.h"
 
 namespace pong {
-  Field::Field(std::string textureFilename, GameDataRef _data) : VisibleObject(textureFilename, _data) {
-    this->loadTexture(textureFilename);
-  }
-
-  void Field::draw() {
-    this->data->window.draw(this->sprite);
-  }
+  Field::Field(GameDataRef _data) : VisibleObject("assets/field.png", _data) {}
 }

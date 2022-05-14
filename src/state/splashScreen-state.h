@@ -5,7 +5,6 @@
 #define SPLASH_SCENE_BACKGROUND_FILEPATH "assets/splashscreen.png"
 
 #include "Game-state.h"
-// #include "../Game.h"
 
 namespace pong {
 

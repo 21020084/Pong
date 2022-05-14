@@ -1,5 +1,8 @@
-#include "Menu-state.h"
 #include "../Game.h"
+#include "Menu-state.h"
+#include "../objects/gui/exit-button.h"
+#include "../objects/gui/one-player-button.h"
+#include "../objects/gui/two-player-button.h"
 
 namespace pong {
   MenuState::MenuState(GameDataRef _data) : GameState(_data) {}
@@ -11,13 +14,24 @@ namespace pong {
     }
     m_backgroundSprite.setTexture(m_backgroundTexture);
 
-    /// TODO: Add buttons to the menu
-    
+    /// Add buttons to the menu
+    OnePlayerButton *onePlayerButton = new OnePlayerButton(this->data);
+    onePlayerButton->setPosition(100, 300);
+    this->data->visibleObjectManager.addObject("onePlayerButton", onePlayerButton);
+
+    TwoPlayerButton *twoPlayerButton = new TwoPlayerButton(this->data);
+    twoPlayerButton->setPosition(100, 500);
+    this->data->visibleObjectManager.addObject("twoPlayerButton", twoPlayerButton);
+
+    ExitButton *exitButton = new ExitButton(this->data);
+    exitButton->setPosition(100, 700);
+    this->data->visibleObjectManager.addObject("exitButton", exitButton);
 
     return 0;
   }
 
   void MenuState::handleInput() {
+    VisibleObject::CursorType = sf::Cursor::Arrow;
     /// Check if the user want to quit the game
     sf::Event event;
     while (this->data->window.pollEvent(event)) {
@@ -28,16 +42,20 @@ namespace pong {
         this->data->window.close();
       }
     }
-  };
+
+    /// Check if the user clicked on the buttons
+    this->data->visibleObjectManager.handleInput(event);
+    this->data->cursor.loadFromSystem(VisibleObject::CursorType);
+    this->data->window.setMouseCursor(this->data->cursor);
+  }
   
-  void MenuState::update(float timeElapsed) {};
+  void MenuState::update(float timeElapsed) {
+    this->data->visibleObjectManager.update(timeElapsed);
+  }
 
   void MenuState::render() {
-    // this->data->window.clear(sf::Color::Black);
-    this->data->window.draw(this->m_backgroundSprite);
-    // data->window.draw(onePlayerSprite);
-    // data->window.draw(twoPlayerSprite);
-    // data->window.draw(exitSprite);
+    this->data->window.draw(m_backgroundSprite);
+    this->data->visibleObjectManager.draw();
     this->data->window.display();
   }
 }

@@ -22,6 +22,15 @@ namespace pong {
     }
   }
 
+  void VisibleObjectManager::clearObjects() {
+    auto itr = this->objects.begin();
+    while (itr != this->objects.end()) {
+      delete itr->second;
+      ++itr;
+    }
+    this->objects.clear();
+  }
+
   VisibleObject *VisibleObjectManager::getObject(std::string name) {
     auto results = this->objects.find(name);
     if (results == this->objects.end()) {

@@ -3,28 +3,30 @@
 
 #include <memory>
 #include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
 
 namespace pong {
-
+  
   struct GameData;
   typedef std::shared_ptr<GameData> GameDataRef;
 
   class VisibleObject {
     public:
       VisibleObject(std::string textureFilename, GameDataRef _data);
-      // VisibleObject(std::string textureFilename);
-      virtual ~VisibleObject() = 0;
+      VisibleObject(std::string textureFilename);
+      virtual ~VisibleObject() = default;
+      static sf::Cursor::Type CursorType;
 
       virtual void loadTexture(std::string textureFilename);
       virtual void handleInput(sf::Event &event) = 0;
       virtual void update(float elapsedTime) = 0;
-      virtual void draw() = 0;
+      void draw();
       virtual sf::Vector2f getPosition();
       virtual void setPosition(float x, float y);
       virtual void move(float x, float y);
       virtual void collideWith(VisibleObject *target) {};
 
-      virtual sf::Rect<float> getBoundingBox();
+      virtual sf::FloatRect getBoundingBox();
       virtual float getTop();
       virtual float getBottom();
       virtual float getLeft();
@@ -65,8 +67,7 @@ namespace pong {
       GameDataRef data;
       sf::Sprite sprite;
       sf::Texture texture;
-      bool isLoaded;  
-
+      bool isLoaded;
       // sf::Vector2f position;
       // sf::Vector2f velocity;
       // sf::Vector2f acceleration;

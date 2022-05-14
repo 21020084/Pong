@@ -8,7 +8,7 @@ namespace pong {
   class VisibleObjectManager {
     public:
       VisibleObjectManager() = default;
-      ~VisibleObjectManager() = default;
+      ~VisibleObjectManager();
       void handleInput(sf::Event &event);
       void update(float elapsedTime);
       void draw();

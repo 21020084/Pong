@@ -1,7 +1,8 @@
 #include "../Game.h"
 #include "state-manager.h"
-#include "Menu-state.h"
 #include "splashScreen-state.h"
+#include "Menu-state.h"
+#include "one-player-state.h"
 
 namespace pong {
   StateManager::StateManager() {
@@ -41,7 +42,7 @@ namespace pong {
         break;
 
       case OnePlayer:
-        // this->newState = new OnePlayerState();
+        this->newState = new OnePlayerState(Game::data);
         break;
 
       case TwoPlayer:

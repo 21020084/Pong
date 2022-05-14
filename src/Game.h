@@ -1,6 +1,7 @@
 #ifndef TRY_BASE_H
 #define TRY_BASE_H
 
+#include <SFML/Window.hpp>
 #include <string>
 #include <memory>
 #include "state/state-manager.h"
@@ -12,6 +13,12 @@ namespace pong {
     sf::Clock clock; 
     StateManager stateManager;
     VisibleObjectManager visibleObjectManager;
+    sf::Cursor cursor;
+    
+    GameData() {
+      cursor.loadFromSystem(sf::Cursor::Arrow);
+      window.setMouseCursor(cursor);
+    }
   };
 
   typedef std::shared_ptr<GameData> GameDataRef;
