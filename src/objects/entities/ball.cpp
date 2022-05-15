@@ -2,15 +2,24 @@
 
 #include "ball.h"
 #include "../../DEFINITION.h"
+#define M_PI 3.141592653589
 
 namespace pong {
-  Ball::Ball(sf::FloatRect constraints) : VisibleObject("assets/ball.png") {
+  Ball::Ball(sf::FloatRect constraints, GameDataRef _data) : VisibleObject("assets/ball.png", _data) {
     this->speed = 500.0f;
     this->maxSpeed = 1000.0f;
     this->angle = 0;
     this->constraints = constraints;
     this->isOut = false;
     this->timeElapsed = 0.0f;
+  }
+
+  void Ball::handleInput(sf::Event &event) {
+    // if (event.type == sf::Event::KeyPressed) {
+    //   if (event.key.code == sf::Keyboard::Space) {
+    //     this->reset();
+    //   }
+    // }
   }
 
   void Ball::update(float _elapsedTime) {

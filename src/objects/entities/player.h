@@ -2,14 +2,12 @@
 #define OBJ_PLAYER_H
 
 #include "../visible-object.h"
-#include "ball.h"
 
 namespace pong {
 
   class Player : public VisibleObject {
     public:
-      // Player(GameDataRef _data);
-      Player(float Top, float Bottom);
+      Player(float Top, float Bottom, GameDataRef _data);
       void handleInput(sf::Event &event) override;
       void update(float elapsedTime) override;
       void runAI();

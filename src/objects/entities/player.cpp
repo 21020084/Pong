@@ -1,8 +1,9 @@
 #include "player.h"
-// #include "ball.h"
+#include "ball.h"
+#include "../../Game.h"
 
 namespace pong {
-  Player::Player(float Top, float Bottom) : VisibleObject("assets/player.png") {
+  Player::Player(float Top, float Bottom, GameDataRef _data) : VisibleObject("assets/player.png", _data) {
     this->constrainTop = Top;
     this->constrainBottom = Bottom;
   }
@@ -42,13 +43,20 @@ namespace pong {
     } else if (curPosition.y > this->constrainBottom) {
       this->setPosition(curPosition.x, this->constrainBottom);
     }
-
-    // this->direction = NONE;
   }
 
   void Player::runAI() {
-    
+    if (!this->ai) {
+      return;
+    }
 
-    // this->direction = NONE;
+    Ball *ball = dynamic_cast<Ball*>(this->data->visibleObjectManager.getObject("ball"));
+    if (ball->getPosition().y < this->getPosition().y) {
+      this->direction = UP;
+    } else if (ball->getPosition().y > this->getPosition().y) {
+      this->direction = DOWN;
+    } else {
+      this->direction = NONE;
+    }
   }
 }

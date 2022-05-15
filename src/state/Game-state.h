@@ -31,7 +31,7 @@ namespace pong {
       bool hasClosed();
       void setNewState();
       void enter();
-      // virtual void endLoopLogic() {};
+      virtual void endLoopLogic() {};
 
     protected:
       GameDataRef data;

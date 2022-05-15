@@ -4,15 +4,14 @@
 #include <cmath>
 #include "../visible-object.h"
 #include "player.h"
-#define M_PI 3.141592653589
 
 namespace pong {
   class Ball : public VisibleObject {
     public:
-      Ball(sf::FloatRect constraints);
+      Ball(sf::FloatRect constraints, GameDataRef _data);
       bool isOut;
       void handleInput(sf::Event &event) override;
-      void update(float elapsedTime) override {}
+      void update(float elapsedTime) override;
       void reset();
       float getSpeed();
       void setSpeed(float speed);

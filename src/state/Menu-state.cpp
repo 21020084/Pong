@@ -16,15 +16,15 @@ namespace pong {
 
     /// Add buttons to the menu
     OnePlayerButton *onePlayerButton = new OnePlayerButton(this->data);
-    onePlayerButton->setPosition(100, 300);
+    onePlayerButton->setPosition(390, 400);
     this->data->visibleObjectManager.addObject("onePlayerButton", onePlayerButton);
 
     TwoPlayerButton *twoPlayerButton = new TwoPlayerButton(this->data);
-    twoPlayerButton->setPosition(100, 500);
+    twoPlayerButton->setPosition(390, 550);
     this->data->visibleObjectManager.addObject("twoPlayerButton", twoPlayerButton);
 
     ExitButton *exitButton = new ExitButton(this->data);
-    exitButton->setPosition(100, 700);
+    exitButton->setPosition(390, 700);
     this->data->visibleObjectManager.addObject("exitButton", exitButton);
 
     return 0;
@@ -32,6 +32,7 @@ namespace pong {
 
   void MenuState::handleInput() {
     VisibleObject::CursorType = sf::Cursor::Arrow;
+
     /// Check if the user want to quit the game
     sf::Event event;
     while (this->data->window.pollEvent(event)) {

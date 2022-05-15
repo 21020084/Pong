@@ -3,6 +3,7 @@
 #include "splashScreen-state.h"
 #include "Menu-state.h"
 #include "one-player-state.h"
+#include "two-player-state.h"
 
 namespace pong {
   StateManager::StateManager() {
@@ -46,7 +47,7 @@ namespace pong {
         break;
 
       case TwoPlayer:
-        // this->newState = new TwoPlayerState();
+        this->newState = new TwoPlayerState(Game::data);
         break;
         
       case GameOver:

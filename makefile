@@ -3,7 +3,7 @@ run: bin/pong.exe
 	bin/pong
 
 #create the executable file
-bin/pong.exe: obj/main.o obj/Game.o obj/state-manager.o obj/Game-state.o obj/splashScreen-state.o obj/Menu-state.o obj/one-player-state.o obj/two-player-state.o obj/visible-object-manager.o obj/visible-object.o obj/exit-button.o obj/one-player-button.o obj/two-player-button.o obj/field.o
+bin/pong.exe: obj/main.o obj/Game.o obj/state-manager.o obj/Game-state.o obj/splashScreen-state.o obj/Menu-state.o obj/one-player-state.o obj/two-player-state.o obj/visible-object-manager.o obj/visible-object.o obj/exit-button.o obj/one-player-button.o obj/two-player-button.o obj/field.o obj/ball.o obj/player.o
 	g++ obj/main.o \
       obj/Game.o \
       obj/state-manager.o \
@@ -18,6 +18,8 @@ bin/pong.exe: obj/main.o obj/Game.o obj/state-manager.o obj/Game-state.o obj/spl
       obj/one-player-button.o \
       obj/two-player-button.o \
 			obj/field.o \
+			obj/ball.o \
+			obj/player.o \
   -o bin/pong.exe \
   -LD:/SFML-2.5.1/lib -lsfml-graphics -lsfml-window -lsfml-system -lsfml-network -lsfml-audio
 
@@ -96,3 +98,11 @@ obj/two-player-button.o: src/objects/gui/two-player-button.cpp src/objects/gui/t
 #compile 'field'
 obj/field.o: src/objects/entities/field.cpp src/objects/entities/field.h src/Game.h src/objects/visible-object-manager.h
 	g++ -c src/objects/entities/field.cpp -o obj/field.o -ID:/SFML-2.5.1/include -g 
+
+#compile 'ball'
+obj/ball.o: src/objects/entities/ball.cpp src/objects/entities/ball.h src/Game.h src/objects/visible-object-manager.h
+	g++ -c src/objects/entities/ball.cpp -o obj/ball.o -ID:/SFML-2.5.1/include -g 
+
+#compile 'player'
+obj/player.o: src/objects/entities/player.cpp src/objects/entities/player.h src/Game.h src/objects/visible-object-manager.h
+	g++ -c src/objects/entities/player.cpp -o obj/player.o -ID:/SFML-2.5.1/include -g 
