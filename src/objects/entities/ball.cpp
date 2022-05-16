@@ -6,12 +6,27 @@
 
 namespace pong {
   Ball::Ball(sf::FloatRect constraints, GameDataRef _data) : VisibleObject("assets/ball.png", _data) {
-    this->speed = 500.0f;
-    this->maxSpeed = 1000.0f;
-    this->angle = 0;
+    this->speed = 10.0f;
+    this->maxSpeed = 50.0f;
+    this->angle = 140;
     this->constraints = constraints;
     this->isOut = false;
     this->timeElapsed = 0.0f;
+    this->collidedWith = RIGHT;
+  }
+
+  void Ball::resetPosition(sf::Vector2f player1Position, sf::Vector2f player2Position) {
+    if (this->collidedWith == LEFT) {
+      this->setPosition(player1Position.x + 15.0f, player1Position.y + 65.0f);
+    } else {
+      this->setPosition(player2Position.x - 34.0f, player1Position.y + 65.0f);
+    }
+
+    // this->setPosition(this->constraints.width / 2, this->constraints.height / 2);
+    // this->speed = 300.0f;
+    // this->isOut = false;
+    // this->timeElapsed = 0.0f;
+    // this->collidedWith = RIGHT;    
   }
 
   void Ball::handleInput(sf::Event &event) {
@@ -26,7 +41,7 @@ namespace pong {
     if (this->isOut) return;
 
     this->timeElapsed += _elapsedTime;
-    if (this->timeElapsed < 1.0f) return;
+    if (this->timeElapsed < 2.0f) return;
 
     float velocity = this->speed * timeElapsed;
     float angleInRadian = angle * M_PI / 180.0f;
@@ -34,16 +49,23 @@ namespace pong {
     float velocityY = 0 * std::cos(angleInRadian) + velocity * std::sin(angleInRadian);
 
     // Handle bounce with the top & bottom walls
-    if (this->getTop() + velocityY <= this->constraints.top 
-    || getBottom() + velocityY >= this->constraints.top + this->constraints.height) {
+    if (this->getTop() + velocityY <= this->constraints.top + 10
+    || this->getBottom() + velocityY >= this->constraints.top + this->constraints.height - 10) {
       this->angle = 360 - this->angle;
       velocityY *= -1;
     }
 
     // Handle loss condition
-    if (this->getLeft() + velocityX <= this->constraints.left 
-    || getRight() + velocityX >= this->constraints.left + this->constraints.width) {
-      isOut = true;
+    if (this->getLeft() + velocityX <= this->constraints.left + 10) {
+      // throw std::runtime_error("Player 2 wins!");
+      this->setPosition(this->constraints.left + 10, this->getPosition().y);
+      this->isOut = true;
+      this->collidedWith = RIGHT;
+    } else if (this->getRight() + velocityX >= this->constraints.left + this->constraints.width - 10) {
+      // throw std::runtime_error("Player 1 wins!");
+      this->setPosition(this->constraints.left + this->constraints.width - 10, this->getPosition().y);
+      this->isOut = true;
+      this->collidedWith = LEFT;
     }
 
     move(velocityX, velocityY);
@@ -51,8 +73,8 @@ namespace pong {
 
   void Ball::collideWith(VisibleObject *target) {
     if (isOut) return;
-    if (!dynamic_cast<Player*>(target)) 
-      throw std::logic_error("Ball::collideWith() - target is not a Player");
+    if (!dynamic_cast<Player*>(target)) return;
+      // throw std::logic_error("Ball::collideWith() - target is not a Player");
 
     this->collidedWith = (this->collidedWith == LEFT) ? RIGHT : LEFT;
 

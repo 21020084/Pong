@@ -17,14 +17,17 @@ namespace pong {
   int OnePlayerState::init() {
     this->data->cursor.loadFromSystem(sf::Cursor::Arrow);
     this->data->window.setMouseCursor(this->data->cursor);
+    /// Remove all objects from the visible object manager
     this->data->visibleObjectManager.clearObjects();
 
 
-    ////////////////////Initialize the game objects/////////////////////////////
+    /*******************Initialize the game objects****************************/
     Field *field = new Field(Game::data);
     field->setPosition(0, 0);
+    /// Object added to the visible object manager
     this->data->visibleObjectManager.addObject("Field", field);
 
+    ////////////////////////////////////////////////////////////////////////////
     float leftEdge = field->getLeft();
     float rightEdge = field->getRight();
     float topEdge = field->getTop();
@@ -32,24 +35,38 @@ namespace pong {
 
     float width = rightEdge - leftEdge;
     float height = bottomEdge - topEdge;
+    ////////////////////////////////////////////////////////////////////////////
 
-    sf::FloatRect ballConstraint = sf::FloatRect(leftEdge + 10, topEdge + 10, width - 20, height - 20);
-    Ball *ball = new Ball(ballConstraint, Game::data);
-    ball->setPosition(leftEdge + width / 2 - ball->getBoundingBox().width / 2, 
-                      topEdge + height / 2 - ball->getBoundingBox().height / 2);
-    this->data->visibleObjectManager.addObject("ball", ball);
-
+    //////////////////////////////////Left player///////////////////////////////
     Player *player1 = new Player(topEdge + 10, bottomEdge - 10, Game::data);
     player1->setPosition(leftEdge + 10, topEdge + height / 2 - player1->getBoundingBox().height / 2);
+    /// Player1 is controlled by the computer 
+    player1->setAI(true);
+    /// Object added to the visible object manager
     this->data->visibleObjectManager.addObject("Player1", player1);
+    ////////////////////////////////////////////////////////////////////////////
 
+    /////////////////////////////////Right player///////////////////////////////
     Player *player2 = new Player(topEdge - 10, bottomEdge - 10, Game::data);
-    player2->setPosition(rightEdge - player2->getBoundingBox().width - 10, topEdge + height / 2 - player2->getBoundingBox().height / 2);
+    player2->setPosition(rightEdge - player2->getBoundingBox().width - 10, 
+                        topEdge + height / 2 - player2->getBoundingBox().height / 2);
+    /// Object added to the visible object manager
     this->data->visibleObjectManager.addObject("Player2", player2);
     ////////////////////////////////////////////////////////////////////////////
 
+    ////////////////////////////////////////////////////////////////////////////
+    sf::FloatRect ballConstraint = sf::FloatRect(leftEdge + 10, topEdge + 10, width - 20, height - 20);
+    Ball *ball = new Ball(ballConstraint, Game::data);
+    /// Set default position of the ball
+    ball->resetPosition(player1->getPosition(), player2->getPosition());
+    /// Object added to the visible object manager
+    this->data->visibleObjectManager.addObject("ball", ball);
+    ////////////////////////////////////////////////////////////////////////////
 
-    ///////////////////Initialize the scoring system////////////////////////////
+    /**************************************************************************/
+
+
+    /******************Initialize the scoring system***************************/
     if (!this->scoreFont.loadFromFile("assets/fonts/Roboto-Bold.ttf")) {
       throw std::runtime_error("Failed to load score font");
     }
@@ -66,8 +83,7 @@ namespace pong {
     this->scoreText2.setFillColor(sf::Color(128, 128, 128, 100));
     this->scoreText2.setPosition(leftEdge + width / 2 + 45, topEdge + height / 2 - 65);
     this->scoreText2.setString("0");
-    ////////////////////////////////////////////////////////////////////////////
-
+    /**************************************************************************/
 
     return 0;
   }
@@ -96,6 +112,9 @@ namespace pong {
   }
 
   void OnePlayerState::update(float timeElapsed) {
+    this->data->visibleObjectManager.update(timeElapsed);
+    this->scoreText1.setString(std::to_string(this->score1));
+    this->scoreText2.setString(std::to_string(this->score2));
   }
 
   void OnePlayerState::render() {

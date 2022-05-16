@@ -16,7 +16,6 @@ namespace pong {
       void handleInput();
       void update(float elapsedTime);
       void render(float interpolation);
-      // bool empty();
     private:
       std::stack<GameState *> states;
       GameState *newState;

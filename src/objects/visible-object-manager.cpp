@@ -62,7 +62,7 @@ namespace pong {
     /// Process collision between objects.  
     auto originItr = this->objects.begin();
     while (originItr != this->objects.end()) {
-      sf::Rect<float> originBound = originItr->second->getBoundingBox();
+      sf::FloatRect originBound = originItr->second->getBoundingBox();
 
       auto targetItr = this->objects.begin();
 
@@ -71,7 +71,7 @@ namespace pong {
           ++targetItr;
           continue;
         }
-        sf::Rect<float> targetBound = targetItr->second->getBoundingBox();
+        sf::FloatRect targetBound = targetItr->second->getBoundingBox();
         if (originBound.intersects(targetBound)) {
           originItr->second->collideWith(targetItr->second);
         }

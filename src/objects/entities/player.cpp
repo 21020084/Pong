@@ -6,6 +6,7 @@ namespace pong {
   Player::Player(float Top, float Bottom, GameDataRef _data) : VisibleObject("assets/player.png", _data) {
     this->constrainTop = Top;
     this->constrainBottom = Bottom;
+    this->ai = false;
   }
 
   void Player::handleInput(sf::Event &event) {
@@ -27,6 +28,7 @@ namespace pong {
   void Player::update(float elapsedTime) {
     if (this->ai) {
       this->runAI();
+      return;
     }
 
     /// Move the player up or down
@@ -38,10 +40,11 @@ namespace pong {
 
     /// Constrain the player to the screen
     sf::Vector2f curPosition = this->getPosition();
-    if (curPosition.y < this->constrainTop) {
-      this->setPosition(curPosition.x, this->constrainTop);
-    } else if (curPosition.y > this->constrainBottom) {
-      this->setPosition(curPosition.x, this->constrainBottom);
+    if (curPosition.y < this->constrainTop + 20) {
+      this->setPosition(curPosition.x, this->constrainTop + 20);
+      /// height of the player is 150 pixels
+    } else if (curPosition.y > this->constrainBottom - 150) {
+      this->setPosition(curPosition.x, this->constrainBottom - 150);
     }
   }
 
@@ -58,5 +61,21 @@ namespace pong {
     } else {
       this->direction = NONE;
     }
+  }
+
+  void Player::setAI(bool _ai) {
+    this->ai = _ai;
+  }
+
+  bool Player::isAI() {
+    return this->ai;
+  }
+
+  float Player::getSpeed() {
+    return this->speed;
+  }
+
+  void Player::setSpeed(float _speed) {
+    this->speed = _speed;
   }
 }
