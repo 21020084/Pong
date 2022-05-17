@@ -104,6 +104,8 @@ namespace pong {
     }
   }
 
+  static int debug = 0;
+
   void OnePlayerState::handleTurnChanging() {
     VisibleObject *tmp = this->data->visibleObjectManager.getObject("ball");
     if (!dynamic_cast<Ball*> (tmp)) {
@@ -121,19 +123,20 @@ namespace pong {
     if (ball->collidedWith == Ball::CollidedWith::RIGHT) {
       this->score2++;
       this->scoreText2.setString(std::to_string(this->score2));
+      // std::this_thread::sleep_for(std::chrono::milliseconds(1000)); 
       ball->resetPosition(this->data->visibleObjectManager.getObject("Player1"),
                           this->data->visibleObjectManager.getObject("Player2"));
     } else {
       this->score1++;
+      if (score1 == 1)
+        debug = 1;
       this->scoreText1.setString(std::to_string(this->score1));
+      // std::this_thread::sleep_for(std::chrono::milliseconds(1000));
       ball->resetPosition(this->data->visibleObjectManager.getObject("Player1"),
                           this->data->visibleObjectManager.getObject("Player2"));
     }
 
     ball->setOut(false);
-    ball->setSpeed(-ball->getSpeed());
-    ball->setAngle(ball->getAngle() + 180);
-
     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
   }
 

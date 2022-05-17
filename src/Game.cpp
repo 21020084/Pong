@@ -25,8 +25,8 @@ namespace pong {
       newTime = data->clock.getElapsedTime().asSeconds();
       frameTime = newTime - currentTime;
 
-      if (frameTime > 0.25f) {
-        frameTime = 0.25f;
+      if (frameTime > 1.0f / 60) {
+        frameTime = 1.0f / 60;
       }
 
       currentTime = newTime;

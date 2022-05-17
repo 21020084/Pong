@@ -19,7 +19,7 @@ namespace pong {
     if (this->collidedWith == LEFT) {
       this->setPosition(player1->getPosition().x + 15.0f, player1->getPosition().y + 65.0f);
     } else {
-      this->setPosition(player2->getPosition().x - 34.0f, player1->getPosition().y + 65.0f);
+      this->setPosition(player2->getPosition().x - 34.0f, player2->getPosition().y + 65.0f);
     }
 
     // this->setPosition(this->constraints.width / 2, this->constraints.height / 2);
@@ -73,7 +73,7 @@ namespace pong {
 
     move(velocityX, velocityY);
   }
-
+  int debug = 0;
   void Ball::collideWith(VisibleObject *target) {
     if (this->is_out) return;
     if (!dynamic_cast<Player*>(target)) return;
@@ -83,7 +83,11 @@ namespace pong {
     if (this->collidedWith == LEFT && target->getLeft() < SCREEN_WIDTH / 2) return;
     if (this->collidedWith == RIGHT && target->getRight() > SCREEN_WIDTH / 2) return;
 
-    this->collidedWith = (this->collidedWith == LEFT) ? RIGHT : LEFT;
+    ++debug;
+
+    if (debug == 2) {
+      debug += 0;
+    }
 
     float paddleCenterY = (target->getTop() + target->getBottom()) / 2;
     float ballCenterY = (this->getTop() + this->getBottom()) / 2;
@@ -97,6 +101,7 @@ namespace pong {
     } else {
         this->angle = 180 - normalizedDiff * 90;
     }
+    this->collidedWith = (this->collidedWith == LEFT) ? RIGHT : LEFT;
   }
 
   float Ball::getSpeed() {
