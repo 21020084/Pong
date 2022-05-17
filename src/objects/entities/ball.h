@@ -9,14 +9,17 @@ namespace pong {
   class Ball : public VisibleObject {
     public:
       Ball(sf::FloatRect constraints, GameDataRef _data);
-      void resetPosition(sf::Vector2f player1Position, sf::Vector2f player2Position);
+      void resetPosition(VisibleObject *player1, VisibleObject *player2);
       void handleInput(sf::Event &event) override;
       void update(float elapsedTime) override;
       void reset();
       float getSpeed();
-      void setSpeed(float speed);
+      void setSpeed(float _speed);
+      float getAngle();
+      void setAngle(float _angle);
       void collideWith(VisibleObject *target) override;
-      bool isOut;
+      bool isOut() {return is_out;}
+      void setOut(bool val) {is_out = val;}
       float timeElapsed;
       enum CollidedWith {
         LEFT,
@@ -24,6 +27,7 @@ namespace pong {
       } collidedWith;
 
     private:
+      bool is_out;
       int angle;
       float speed;
       float maxSpeed;

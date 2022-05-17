@@ -1,4 +1,5 @@
 #include "visible-object-manager.h"
+#include "entities/ball.h"
 
 namespace pong {
 
@@ -58,6 +59,13 @@ namespace pong {
       itr->second->update(timeElapsed);
       ++itr;
     }
+
+    /// Check if the ball is out of bounds
+    // VisibleObject *tmp = this->getObject("ball");
+    // if (dynamic_cast<Ball*> (tmp)) {
+    //   Ball *ball = dynamic_cast<Ball*> (tmp);
+    //   if (!ball->isOut()) return;
+    // }
 
     /// Process collision between objects.  
     auto originItr = this->objects.begin();

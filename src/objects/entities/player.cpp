@@ -1,6 +1,7 @@
 #include "player.h"
 #include "ball.h"
 #include "../../Game.h"
+#include "../../DEFINITION.h"
 
 namespace pong {
   Player::Player(float Top, float Bottom, GameDataRef _data) : VisibleObject("assets/player.png", _data) {
@@ -28,16 +29,13 @@ namespace pong {
   void Player::update(float elapsedTime) {
     if (this->ai) {
       this->runAI();
-      return;
     }
-
-    /// Move the player up or down
-    if (this->direction == UP) {  
+    if (this->direction == UP) {
       this->move(0, -this->speed * elapsedTime);
     } else if (this->direction == DOWN) {
       this->move(0, this->speed * elapsedTime);
     }
-
+    
     /// Constrain the player to the screen
     sf::Vector2f curPosition = this->getPosition();
     if (curPosition.y < this->constrainTop + 20) {
@@ -54,9 +52,28 @@ namespace pong {
     }
 
     Ball *ball = dynamic_cast<Ball*>(this->data->visibleObjectManager.getObject("ball"));
-    if (ball->getPosition().y < this->getPosition().y) {
+    if (ball == nullptr) {
+      return;
+    }
+    
+    /// The AI start moving
+    if (ball->getPosition().x - this->getPosition().x >= SCREEN_WIDTH / 2 - 300) return;
+
+    float ballY = ball->getPosition().y;
+    float playerY = this->getPosition().y;
+    float ballHeight = ball->getBoundingBox().height;
+    float playerHeight = this->getBoundingBox().height;
+    float ballCenterY = ballY + ballHeight / 2;
+    float playerCenterY = playerY + playerHeight / 2;
+
+    if (playerY < ballCenterY && ballCenterY < playerY + playerHeight) {
+      this->direction = NONE;
+      return;
+    }
+
+    if (ballCenterY < playerCenterY) {
       this->direction = UP;
-    } else if (ball->getPosition().y > this->getPosition().y) {
+    } else if (ballCenterY > playerCenterY) {
       this->direction = DOWN;
     } else {
       this->direction = NONE;

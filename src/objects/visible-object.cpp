@@ -43,27 +43,27 @@ namespace pong {
     return this->sprite.getPosition();
   }
 
-  sf::Rect<float> VisibleObject::getBoundingBox() {
+  sf::FloatRect VisibleObject::getBoundingBox() {
     return this->sprite.getGlobalBounds();
   }
 
   float VisibleObject::getTop() {
-    sf::Rect<float> boundingRect = getBoundingBox();
+    sf::FloatRect boundingRect = getBoundingBox();
     return boundingRect.top;
   }
 
   float VisibleObject::getBottom() {
-    sf::Rect<float> boundingRect = getBoundingBox();
+    sf::FloatRect boundingRect = getBoundingBox();
     return boundingRect.top + boundingRect.height;
   }
 
   float VisibleObject::getLeft() {
-    sf::Rect<float> boundingRect = getBoundingBox();
+    sf::FloatRect boundingRect = getBoundingBox();
     return boundingRect.left;
   }
 
   float VisibleObject::getRight() {
-    sf::Rect<float> boundingRect = getBoundingBox();
+    sf::FloatRect boundingRect = getBoundingBox();
     return boundingRect.left + boundingRect.width;
   }
 }

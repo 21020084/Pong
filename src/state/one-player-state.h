@@ -13,7 +13,7 @@ namespace pong {
         void handleInput() override;
         void update(float timeElapsed) override;
         void render() override;
-        void endLoopLogic() override;
+        void handleTurnChanging();
         // bool isNextTurn() {return nextTurn;}
         // void enterNextTurn() {
         //   if (nextTurn == false) nextTurn = true;

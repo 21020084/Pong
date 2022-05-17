@@ -27,9 +27,7 @@ namespace pong {
       };
 
       Direction direction = NONE;
-      float speed = 800.0f;
-      float acceleration = 200.0f;
-      float deceleration = 200.0f;
+      float speed = 950.0f;
       float constrainTop = 0.0f;
       float constrainBottom = 0.0f;
   };

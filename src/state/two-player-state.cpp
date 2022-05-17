@@ -79,10 +79,6 @@ namespace pong {
 
   void TwoPlayerState::update(float timeElapsed) {
   }
-  
-  void TwoPlayerState::endLoopLogic() {
-
-  }
 
   void TwoPlayerState::render() {
     this->data->window.clear(sf::Color::White);
