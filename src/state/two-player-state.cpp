@@ -1,4 +1,5 @@
 #include <stdexcept>
+#include <thread>
 
 #include "two-player-state.h"
 #include "../objects/visible-object.h"
@@ -9,18 +10,25 @@
 #include "../DEFINITION.h"
 
 namespace pong {
-  TwoPlayerState::TwoPlayerState(GameDataRef _data) : GameState(_data) {}
+  TwoPlayerState::TwoPlayerState(GameDataRef _data) : GameState(_data) {
+    this->score1 = 0;
+    this->score2 = 0;
+  }
 
   int TwoPlayerState::init() {
     this->data->cursor.loadFromSystem(sf::Cursor::Arrow);
     this->data->window.setMouseCursor(this->data->cursor);
+    /// Remove all objects from the visible object manager
     this->data->visibleObjectManager.clearObjects();
 
-    ////////////////////Initialize the game objects/////////////////////////////
+
+    /*******************Initialize the game objects****************************/
     Field *field = new Field(Game::data);
     field->setPosition(0, 0);
+    /// Object added to the visible object manager
     this->data->visibleObjectManager.addObject("Field", field);
 
+    ////////////////////////////////////////////////////////////////////////////
     float leftEdge = field->getLeft();
     float rightEdge = field->getRight();
     float topEdge = field->getTop();
@@ -28,24 +36,36 @@ namespace pong {
 
     float width = rightEdge - leftEdge;
     float height = bottomEdge - topEdge;
+    ////////////////////////////////////////////////////////////////////////////
 
-    sf::FloatRect ballConstraint = sf::FloatRect(leftEdge + 10, topEdge + 10, width - 20, height - 20);
-    Ball *ball = new Ball(ballConstraint, Game::data);
-    ball->setPosition(leftEdge + width / 2 - ball->getBoundingBox().width / 2, 
-                      topEdge + height / 2 - ball->getBoundingBox().height / 2);
-    this->data->visibleObjectManager.addObject("ball", ball);
-
-    Player *player1 = new Player(topEdge + 10, bottomEdge - 10, Game::data);
+    //////////////////////////////////Left player///////////////////////////////
+    Player *player1 = new Player(topEdge + 10, bottomEdge - 10, true, Game::data);
     player1->setPosition(leftEdge + 10, topEdge + height / 2 - player1->getBoundingBox().height / 2);
+    /// Object added to the visible object manager
     this->data->visibleObjectManager.addObject("Player1", player1);
+    ////////////////////////////////////////////////////////////////////////////
 
-    Player *player2 = new Player(topEdge - 10, bottomEdge - 10, Game::data);
-    player2->setPosition(rightEdge - player2->getBoundingBox().width - 10, topEdge + height / 2 - player2->getBoundingBox().height / 2);
+    /////////////////////////////////Right player///////////////////////////////
+    Player *player2 = new Player(topEdge - 10, bottomEdge - 10, false, Game::data);
+    player2->setPosition(rightEdge - player2->getBoundingBox().width - 10, 
+                        topEdge + height / 2 - player2->getBoundingBox().height / 2);
+    /// Object added to the visible object manager
     this->data->visibleObjectManager.addObject("Player2", player2);
     ////////////////////////////////////////////////////////////////////////////
 
+    ////////////////////////////////////////////////////////////////////////////
+    sf::FloatRect ballConstraint = sf::FloatRect(leftEdge, topEdge, width, height);
+    Ball *ball = new Ball(ballConstraint, Game::data);
+    /// Set default position of the ball
+    ball->resetPosition(player1, player2);
+    /// Object added to the visible object manager
+    this->data->visibleObjectManager.addObject("ball", ball);
+    ////////////////////////////////////////////////////////////////////////////
 
-    ///////////////////Initialize the scoring system////////////////////////////
+    /**************************************************************************/
+
+
+    /******************Initialize the scoring system***************************/
     if (!this->scoreFont.loadFromFile("assets/fonts/Roboto-Bold.ttf")) {
       throw std::runtime_error("Failed to load score font");
     }
@@ -62,8 +82,7 @@ namespace pong {
     this->scoreText2.setFillColor(sf::Color(128, 128, 128, 100));
     this->scoreText2.setPosition(leftEdge + width / 2 + 45, topEdge + height / 2 - 65);
     this->scoreText2.setString("0");
-    ////////////////////////////////////////////////////////////////////////////
-
+    /**************************************************************************/
 
     return 0;
   }
@@ -71,13 +90,61 @@ namespace pong {
   void TwoPlayerState::handleInput() {
     sf::Event event;
     while (this->data->window.pollEvent(event)) {
-      if (event.type == sf::Event::Closed | sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+      /// Check if the user wants to close the window
+      if (event.type == sf::Event::Closed) {
         this->data->window.close();
       }
+      /// Check if the user wants to pause the game
+      // if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
+      //   this->data->gameStateManager.pushState(GameStateType::PAUSE);
+      // }
+      this->data->visibleObjectManager.handleInput(event);
     }
   }
 
+  static int debug = 0;
+
+  void TwoPlayerState::handleTurnChanging() {
+    VisibleObject *tmp = this->data->visibleObjectManager.getObject("ball");
+    if (!dynamic_cast<Ball*> (tmp)) {
+      throw std::runtime_error("Ball not found");
+    }
+    Ball *ball = dynamic_cast<Ball*> (tmp);
+    if (!ball->isOut()) return;
+
+    // tmp = this->data->visibleObjectManager.getObject("Field");
+    // if (!dynamic_cast<Field*> (tmp)) {
+    //   throw std::runtime_error("Field not found");
+    // }
+    // Field *field = dynamic_cast<Field*> (tmp);
+
+    if (ball->collidedWith == Ball::CollidedWith::RIGHT) {
+      this->score2++;
+      this->scoreText2.setString(std::to_string(this->score2));
+      // std::this_thread::sleep_for(std::chrono::milliseconds(1000)); 
+      ball->resetPosition(this->data->visibleObjectManager.getObject("Player1"),
+                          this->data->visibleObjectManager.getObject("Player2"));
+    } else {
+      this->score1++;
+      if (score1 == 1)
+        debug = 1;
+      this->scoreText1.setString(std::to_string(this->score1));
+      // std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+      ball->resetPosition(this->data->visibleObjectManager.getObject("Player1"),
+                          this->data->visibleObjectManager.getObject("Player2"));
+    }
+
+    ball->setOut(false);
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+  }
+
   void TwoPlayerState::update(float timeElapsed) {
+    this->data->visibleObjectManager.update(timeElapsed);
+
+    this->handleTurnChanging();
+
+    this->scoreText1.setString(std::to_string(this->score1));
+    this->scoreText2.setString(std::to_string(this->score2));
   }
 
   void TwoPlayerState::render() {

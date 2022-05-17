@@ -39,7 +39,7 @@ namespace pong {
     ////////////////////////////////////////////////////////////////////////////
 
     //////////////////////////////////Left player///////////////////////////////
-    Player *player1 = new Player(topEdge + 10, bottomEdge - 10, Game::data);
+    Player *player1 = new Player(topEdge + 10, bottomEdge - 10, true, Game::data);
     player1->setPosition(leftEdge + 10, topEdge + height / 2 - player1->getBoundingBox().height / 2);
     /// Player1 is controlled by the computer 
     player1->setAI(true);
@@ -48,7 +48,7 @@ namespace pong {
     ////////////////////////////////////////////////////////////////////////////
 
     /////////////////////////////////Right player///////////////////////////////
-    Player *player2 = new Player(topEdge - 10, bottomEdge - 10, Game::data);
+    Player *player2 = new Player(topEdge - 10, bottomEdge - 10, false, Game::data);
     player2->setPosition(rightEdge - player2->getBoundingBox().width - 10, 
                         topEdge + height / 2 - player2->getBoundingBox().height / 2);
     /// Object added to the visible object manager

@@ -12,6 +12,7 @@ namespace pong {
         void handleInput() override;
         void update(float timeElapsed) override;
         void render() override;
+        void handleTurnChanging();
 
       private:
         int score1, score2, winningScore;

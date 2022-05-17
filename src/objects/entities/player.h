@@ -7,7 +7,7 @@ namespace pong {
 
   class Player : public VisibleObject {
     public:
-      Player(float Top, float Bottom, GameDataRef _data);
+      Player(float Top, float Bottom, bool isLeft, GameDataRef _data);
       void handleInput(sf::Event &event) override;
       void update(float elapsedTime) override;
       void runAI();
@@ -19,6 +19,7 @@ namespace pong {
     private:
       // GameDataRef data;
       bool ai;
+      bool left;
 
       enum Direction {
         UP,

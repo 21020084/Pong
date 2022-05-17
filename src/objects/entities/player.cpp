@@ -4,9 +4,10 @@
 #include "../../DEFINITION.h"
 
 namespace pong {
-  Player::Player(float Top, float Bottom, GameDataRef _data) : VisibleObject("assets/player.png", _data) {
+  Player::Player(float Top, float Bottom,  bool isLeft, GameDataRef _data) : VisibleObject("assets/player.png", _data) {
     this->constrainTop = Top;
     this->constrainBottom = Bottom;
+    this->left = isLeft;
     this->ai = false;
   }
 
@@ -15,15 +16,24 @@ namespace pong {
       return;
     }
 
-    if (event.type == sf::Event::KeyPressed) {
-      if (event.key.code == sf::Keyboard::Up) {
+    if (!this->left) {
+      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up)) {
         this->direction = UP;
-      } else if (event.key.code == sf::Keyboard::Down) {
+      } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down)) {
         this->direction = DOWN;
+      } else {
+        this->direction = NONE;
       }
-    } else if (event.type == sf::Event::KeyReleased) {
-      this->direction = NONE;
+    } else {
+      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) {
+        this->direction = UP;
+      } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)) {
+        this->direction = DOWN;
+      } else {
+        this->direction = NONE;
+      }
     }
+    
   }
 
   void Player::update(float elapsedTime) {
