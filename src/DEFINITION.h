@@ -5,14 +5,7 @@
 #define SCREEN_HEIGHT 940
 #define SCREEN_WIDTH 1406
 
-/// Ball's speed
-#define BALL_LOW_SPEED 5
-#define BALL_MEDIUM_SPEED 10
-#define BALL_HIGH_SPEED 15
-
-/// Player's speed
-#define PLAYER_LOW_SPEED 5
-#define PLAYER_MEDIUM_SPEED 10
-#define PLAYER_HIGH_SPEED 15
+#define BALL_BASE_SPEED 15.0f
+#define FREEZING_TIME 1.55f
 
 #endif // DEFINITION_H

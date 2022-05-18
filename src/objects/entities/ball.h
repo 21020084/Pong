@@ -1,6 +1,7 @@
 #ifndef OBJ_BALL_H
 #define OBJ_BALL_H
 
+#include <SFML/Audio.hpp>
 #include <cmath>
 #include "../visible-object.h"
 #include "player.h"
@@ -14,13 +15,13 @@ namespace pong {
       void update(float elapsedTime) override;
       void reset();
       float getSpeed();
-      void setSpeed(float _speed);
+      void addSpeed(float _speed);
       float getAngle();
       void setAngle(float _angle);
+      void resetFreezeTimer();
       void collideWith(VisibleObject *target) override;
       bool isOut() {return is_out;}
       void setOut(bool val) {is_out = val;}
-      float timeElapsed;
       enum CollidedWith {
         LEFT,
         RIGHT
@@ -28,10 +29,19 @@ namespace pong {
 
     private:
       bool is_out;
-      int angle;
+      float angle;
       float speed;
       float maxSpeed;
+      float freezeTimer;
       sf::FloatRect constraints;
+      sf::Sound ballOutSound;
+      sf::SoundBuffer ballOutSoundBuffer;
+      sf::Sound ballHitSound;
+      std::vector<sf::SoundBuffer> ballHitSoundBuffer;
+      sf::Sound winningSound;
+      sf::SoundBuffer winningSoundBuffer;
+      sf::Sound losingSound;
+      sf::SoundBuffer losingSoundBuffer;
   };
 }
 

@@ -2,6 +2,7 @@
 #define ONE_PLAYER_STATE_H
 
 #include "game-state.h"
+#include "../DEFINITION.h"
 
 namespace pong {
     class OnePlayerState : public GameState {
@@ -27,11 +28,8 @@ namespace pong {
         int score1, score2, winningScore;
         sf::Text scoreText1, scoreText2;
         sf::Font scoreFont;
-
-        bool nextTurn;
-        bool gameEnded;
-        sf::Text gameOverText; 
-    };
+        float ballSpeed = BALL_BASE_SPEED;
+      };
 }
 
 #endif // ONE_PLAYER_STATE_H

@@ -2,6 +2,7 @@
 #define TWO_PLAYER_STATE_H
 
 #include "game-state.h"
+#include "../DEFINITION.h"
 
 namespace pong {
     class TwoPlayerState : public GameState {
@@ -18,9 +19,7 @@ namespace pong {
         int score1, score2, winningScore;
         sf::Text scoreText1, scoreText2;
         sf::Font scoreFont;
-
-        bool gameOver = 0;
-        sf::Text gameOverText;
+        float ballSpeed = BALL_BASE_SPEED;
     };
   
 }

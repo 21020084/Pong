@@ -9,6 +9,7 @@ namespace pong {
     this->constrainBottom = Bottom;
     this->left = isLeft;
     this->ai = false;
+    this->freezeTimer = 1.0f;
   }
 
   void Player::handleInput(sf::Event &event) {
@@ -37,13 +38,18 @@ namespace pong {
   }
 
   void Player::update(float elapsedTime) {
+    this->freezeTimer -= elapsedTime;
+    if (this->freezeTimer > 0.0f) {
+      return;
+    }
+
     if (this->ai) {
       this->runAI();
     }
     if (this->direction == UP) {
-      this->move(0, -this->speed * elapsedTime);
+      this->move(0, -this->speed);
     } else if (this->direction == DOWN) {
-      this->move(0, this->speed * elapsedTime);
+      this->move(0, this->speed);
     }
     
     /// Constrain the player to the screen
@@ -67,7 +73,7 @@ namespace pong {
     }
     
     /// The AI start moving
-    if (ball->getPosition().x - this->getPosition().x >= SCREEN_WIDTH / 2 - 350) return;
+    if (ball->getPosition().x - this->getPosition().x >= SCREEN_WIDTH / 2 - 50) return;
 
     float ballY = ball->getPosition().y;
     float playerY = this->getPosition().y;
@@ -90,6 +96,10 @@ namespace pong {
     }
   }
 
+  void Player::resetFreezeTimer() {
+    this->freezeTimer = FREEZING_TIME;
+  }
+
   void Player::setAI(bool _ai) {
     this->ai = _ai;
   }
@@ -102,7 +112,7 @@ namespace pong {
     return this->speed;
   }
 
-  void Player::setSpeed(float _speed) {
-    this->speed = _speed;
+  void Player::addSpeed(float _speed) {
+    this->speed += _speed;
   }
 }

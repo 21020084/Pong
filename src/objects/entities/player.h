@@ -12,14 +12,16 @@ namespace pong {
       void update(float elapsedTime) override;
       void runAI();
       void setAI(bool ai);
+      void resetFreezeTimer();
       bool isAI();
       float getSpeed();
-      void setSpeed(float speed);
+      void addSpeed(float speed);
 
     private:
       // GameDataRef data;
       bool ai;
       bool left;
+      float freezeTimer;
 
       enum Direction {
         UP,
@@ -28,7 +30,7 @@ namespace pong {
       };
 
       Direction direction = NONE;
-      float speed = 950.0f;
+      float speed = 15.5f;
       float constrainTop = 0.0f;
       float constrainBottom = 0.0f;
   };

@@ -3,9 +3,7 @@
 
 namespace pong {
   ExitButton::ExitButton(GameDataRef _data) : VisibleObject("assets/exit-btn.png", _data) {}
-  ///////////////////
-  ///    TODO:   ////  
-  ///////////////////
+
   void ExitButton::handleInput(sf::Event &event) {
     if (event.type == sf::Event::MouseButtonPressed) {
       int x = event.mouseButton.x;

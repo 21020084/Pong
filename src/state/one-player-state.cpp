@@ -107,18 +107,12 @@ namespace pong {
   static int debug = 0;
 
   void OnePlayerState::handleTurnChanging() {
-    VisibleObject *tmp = this->data->visibleObjectManager.getObject("ball");
-    if (!dynamic_cast<Ball*> (tmp)) {
+    /******* Reset ball position if it is out of the field *******/    
+    Ball *ball = dynamic_cast<Ball*> (this->data->visibleObjectManager.getObject("ball"));
+    if (!ball) {
       throw std::runtime_error("Ball not found");
     }
-    Ball *ball = dynamic_cast<Ball*> (tmp);
     if (!ball->isOut()) return;
-
-    // tmp = this->data->visibleObjectManager.getObject("Field");
-    // if (!dynamic_cast<Field*> (tmp)) {
-    //   throw std::runtime_error("Field not found");
-    // }
-    // Field *field = dynamic_cast<Field*> (tmp);
 
     if (ball->collidedWith == Ball::CollidedWith::RIGHT) {
       this->score2++;
@@ -135,9 +129,39 @@ namespace pong {
       ball->resetPosition(this->data->visibleObjectManager.getObject("Player1"),
                           this->data->visibleObjectManager.getObject("Player2"));
     }
-
     ball->setOut(false);
-    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    ball->addSpeed(0.5f);
+    ball->resetFreezeTimer();
+    /// Reload the angle of the ball
+    if (ball->collidedWith == Ball::CollidedWith::RIGHT) {
+      ball->setAngle(1.0f * (rand() % 161) + 100.f);
+    } else {
+      ball->setAngle(1.0f * (rand() % 161) - 80.0f);
+    }
+    /***********************************************************/
+
+
+    /*********** Reset and update player ***********/
+    Player *player1 = dynamic_cast<Player*> (this->data->visibleObjectManager.getObject("Player1"));
+    if (!player1) {
+      throw std::runtime_error("Player1 not found");
+    }
+    player1->resetFreezeTimer();
+
+    Player *player2 = dynamic_cast<Player*> (this->data->visibleObjectManager.getObject("Player2"));
+    if (!player2) {
+      throw std::runtime_error("Player1 not found");
+    }
+    player2->resetFreezeTimer();
+
+    if (ball->getSpeed()  - this->ballSpeed >= 3.0f) {
+      this->ballSpeed = ball->getSpeed();
+      player1->addSpeed(0.6f);
+      player2->addSpeed(0.6f);
+    }
+    /************************************************/
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(1550));
   }
 
   void OnePlayerState::update(float timeElapsed) {

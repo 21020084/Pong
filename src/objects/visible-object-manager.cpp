@@ -35,7 +35,7 @@ namespace pong {
   VisibleObject *VisibleObjectManager::getObject(std::string name) {
     auto results = this->objects.find(name);
     if (results == this->objects.end()) {
-      return NULL;
+      return nullptr;
     }
     return results->second;
   }

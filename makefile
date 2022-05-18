@@ -100,7 +100,7 @@ obj/field.o: src/objects/entities/field.cpp src/objects/entities/field.h src/Gam
 	g++ -c src/objects/entities/field.cpp -o obj/field.o -ID:/SFML-2.5.1/include -g 
 
 #compile 'ball'
-obj/ball.o: src/objects/entities/ball.cpp src/objects/entities/ball.h src/Game.h src/objects/visible-object-manager.h
+obj/ball.o: src/objects/entities/ball.cpp src/objects/entities/ball.h src/Game.h src/objects/visible-object-manager.h  src/DEFINITION.h
 	g++ -c src/objects/entities/ball.cpp -o obj/ball.o -ID:/SFML-2.5.1/include -g 
 
 #compile 'player'
