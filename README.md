@@ -56,6 +56,6 @@
   - Một số phương thức có thể được viết thành một lớp riêng, thay vì nằm trong các đối tượng như hiện tại. Mục đích cuối cùng là có thể phát triển dự án hiện tại thành các dự án lớn hơn một cách dễ dàng hơn.
 * **Một số kinh nghiệm rút ra sau dự án:**
   - Bước đầu làm quen với cách tách và tổ chức file trong một dự án lập trình.
-  - Biết cách làm việc với Makefile và command line ở mức cơ bản. 
+  - Biết cách làm việc với Makefile và command line (Git Bash) ở mức cơ bản. 
   - Làm quen với Lập trình hướng đối tượng, một kỹ thuật quan trọng và rất phổ biến trong lập trình chuyên nghiệp.
   - Làm quen với một thư viện đồ họa viết bằng C++, biết thêm một số kiến thức về Lập trình hướng đối tượng thông qua API của thư viện này.
