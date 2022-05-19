@@ -8,6 +8,7 @@ namespace pong {
     class OnePlayerState : public GameState {
       public:
         OnePlayerState (GameDataRef _data);
+        ~OnePlayerState();
 
         int init() override;
         void reset();

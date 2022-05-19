@@ -5,9 +5,12 @@
 #include "../objects/gui/two-player-button.h"
 
 namespace pong {
-  MenuState::MenuState(GameDataRef _data) : GameState(_data) {}
+  MenuState::MenuState(GameDataRef _data) : GameState(_data) {
+    this->m_ID = Menu;
+  }
 
   int MenuState::init() {
+
     if (!m_backgroundTexture.loadFromFile("assets/m_background.png")) {
       std::cout << "Error loading menu background" << std::endl;
       return -1;
@@ -17,15 +20,15 @@ namespace pong {
     /// Add buttons to the menu
     OnePlayerButton *onePlayerButton = new OnePlayerButton(this->data);
     onePlayerButton->setPosition(390, 400);
-    this->data->visibleObjectManager.addObject("onePlayerButton", onePlayerButton);
+    this->data->visibleObjectManager.addObject("M_onePlayerButton", onePlayerButton);
 
     TwoPlayerButton *twoPlayerButton = new TwoPlayerButton(this->data);
     twoPlayerButton->setPosition(390, 550);
-    this->data->visibleObjectManager.addObject("twoPlayerButton", twoPlayerButton);
+    this->data->visibleObjectManager.addObject("M_twoPlayerButton", twoPlayerButton);
 
     ExitButton *exitButton = new ExitButton(this->data);
     exitButton->setPosition(390, 700);
-    this->data->visibleObjectManager.addObject("exitButton", exitButton);
+    this->data->visibleObjectManager.addObject("M_exitButton", exitButton);
 
     return 0;
   }
@@ -45,18 +48,18 @@ namespace pong {
     }
 
     /// Check if the user clicked on the buttons
-    this->data->visibleObjectManager.handleInput(event);
+    this->data->visibleObjectManager.handleInput(event, 'M');
     this->data->cursor.loadFromSystem(VisibleObject::CursorType);
     this->data->window.setMouseCursor(this->data->cursor);
   }
   
   void MenuState::update(float timeElapsed) {
-    this->data->visibleObjectManager.update(timeElapsed);
+    this->data->visibleObjectManager.update(timeElapsed, 'M');
   }
 
   void MenuState::render() {
     this->data->window.draw(m_backgroundSprite);
-    this->data->visibleObjectManager.draw();
+    this->data->visibleObjectManager.draw('M');
     this->data->window.display();
   }
 }

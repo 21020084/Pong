@@ -40,28 +40,31 @@ namespace pong {
     return results->second;
   }
 
-  void VisibleObjectManager::handleInput(sf::Event &event) {
+  void VisibleObjectManager::handleInput(sf::Event &event, char stateSignal) {
     auto itr = this->objects.begin();
     while (itr != this->objects.end()) {
-      if (itr->first == "test") {
-        ++itr;
-        continue;
+      if (itr->first[0] == stateSignal) {
+        itr->second->handleInput(event);
       }
-      itr->second->handleInput(event);
       ++itr;
     }
   }
 
-  void VisibleObjectManager::update(float timeElapsed)
-  {
+  void VisibleObjectManager::update(float timeElapsed, char stateSignal) {
     auto itr = this->objects.begin();
     while (itr != this->objects.end()) {
-      itr->second->update(timeElapsed);
+      if (itr->first[0] == stateSignal) {
+        itr->second->update(timeElapsed);
+      }
       ++itr;
     }
 
     /// Check if the ball is out of bounds
-    VisibleObject *tmp = this->getObject("ball");
+    VisibleObject *tmp = this->getObject("O_ball");
+    if (stateSignal == 'T') {
+      tmp = this->getObject("T_ball");
+    }
+
     if (dynamic_cast<Ball*> (tmp)) {
       Ball *ball = dynamic_cast<Ball*> (tmp);
       if (ball->isOut()) return;
@@ -89,10 +92,12 @@ namespace pong {
     }
   }
 
-  void VisibleObjectManager::draw() {
+  void VisibleObjectManager::draw(char stateSignal) {
     auto itr = this->objects.begin();
     while (itr != this->objects.end()) {
-      itr->second->draw();
+      if (itr->first[0] == stateSignal) {
+        itr->second->draw();
+      }
       ++itr;
     }
   }

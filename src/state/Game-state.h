@@ -12,8 +12,8 @@ namespace pong {
     Menu,
     OnePlayer,
     TwoPlayer,
-    GameOver,
-    Exiting
+    Pause,
+    None
   };
 
   struct GameData;
@@ -27,15 +27,19 @@ namespace pong {
       virtual void handleInput() = 0;
       virtual void update(float elapsedTime) = 0;
       virtual void render() = 0;
+
+      StateID getID();
       bool hasEntered();
       bool hasClosed();
       void setNewState();
       void enter();
+      void close();
 
     protected:
       GameDataRef data;
       bool m_hasEntered;
       bool m_hasClosed;
+      StateID m_ID;
   };
 }
 

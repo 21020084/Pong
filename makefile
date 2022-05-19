@@ -3,7 +3,7 @@ run: bin/pong.exe
 	bin/pong
 
 #create the executable file
-bin/pong.exe: obj/main.o obj/Game.o obj/state-manager.o obj/Game-state.o obj/splashScreen-state.o obj/Menu-state.o obj/one-player-state.o obj/two-player-state.o obj/visible-object-manager.o obj/visible-object.o obj/exit-button.o obj/one-player-button.o obj/two-player-button.o obj/field.o obj/ball.o obj/player.o
+bin/pong.exe: obj/main.o obj/Game.o obj/state-manager.o obj/Game-state.o obj/splashScreen-state.o obj/Menu-state.o obj/one-player-state.o obj/two-player-state.o obj/pause-state.o obj/visible-object-manager.o obj/visible-object.o obj/exit-button.o obj/one-player-button.o obj/two-player-button.o obj/resume-button.o obj/mainMenu-button.o obj/field.o obj/ball.o obj/player.o
 	g++ obj/main.o \
       obj/Game.o \
       obj/state-manager.o \
@@ -12,11 +12,14 @@ bin/pong.exe: obj/main.o obj/Game.o obj/state-manager.o obj/Game-state.o obj/spl
 			obj/Menu-state.o \
 			obj/one-player-state.o \
 			obj/two-player-state.o \
+			obj/pause-state.o \
       obj/visible-object-manager.o \
       obj/visible-object.o \
       obj/exit-button.o \
       obj/one-player-button.o \
       obj/two-player-button.o \
+      obj/resume-button.o \
+      obj/mainMenu-button.o \
 			obj/field.o \
 			obj/ball.o \
 			obj/player.o \
@@ -64,7 +67,7 @@ obj/one-player-state.o: src/state/one-player-state.cpp src/state/one-player-stat
 	g++ -c src/state/one-player-state.cpp -o obj/one-player-state.o -ID:/SFML-2.5.1/include -g
 
 #update one-player-state.cpp
-src/state/one-player-state.cpp: src/objects/gui/exit-button.h src/objects/gui/one-player-button.h src/objects/gui/two-player-button.h 
+src/state/one-player-state.cpp: src/objects/visible-object.h src/objects/entities/field.h src/objects/entities/ball.h src/objects/entities/player.h 
 	touch src/state/one-player-state.cpp
 
 #compile 'two-player-state'
@@ -72,8 +75,16 @@ obj/two-player-state.o: src/state/two-player-state.cpp src/state/two-player-stat
 	g++ -c src/state/two-player-state.cpp -o obj/two-player-state.o -ID:/SFML-2.5.1/include -g
 
 #update two-player-state.cpp
-src/state/two-player-state.cpp: src/objects/gui/exit-button.h src/objects/gui/two-player-button.h src/objects/gui/two-player-button.h 
+src/state/two-player-state.cpp: src/objects/visible-object.h src/objects/entities/field.h src/objects/entities/ball.h src/objects/entities/player.h 
 	touch src/state/two-player-state.cpp
+
+#compile 'pause-state'
+obj/pause-state.o: src/state/pause-state.cpp src/state/pause-state.h src/Game.h src/state/Game-state.h
+	g++ -c src/state/pause-state.cpp -o obj/pause-state.o -ID:/SFML-2.5.1/include -g
+
+#update pause-state.cpp
+src/state/pause-state.cpp: src/objects/visible-object.h src/objects/gui/resume-button.h src/objects/gui/mainMenu-button.h 
+	touch src/state/pause-state.cpp
 
 #compile 'visible-object-manager'
 obj/visible-object-manager.o: src/objects/visible-object-manager.cpp src/objects/visible-object-manager.h src/objects/visible-object.h
@@ -94,6 +105,14 @@ obj/one-player-button.o: src/objects/gui/one-player-button.cpp src/objects/gui/o
 #compile 'two-player-button'
 obj/two-player-button.o: src/objects/gui/two-player-button.cpp src/objects/gui/two-player-button.h src/Game.h src/objects/visible-object-manager.h
 	g++ -c src/objects/gui/two-player-button.cpp -o obj/two-player-button.o -ID:/SFML-2.5.1/include -g 
+
+#compile 'resume-button'
+obj/resume-button.o: src/objects/gui/resume-button.cpp src/objects/gui/resume-button.h src/Game.h src/objects/visible-object-manager.h
+	g++ -c src/objects/gui/resume-button.cpp -o obj/resume-button.o -ID:/SFML-2.5.1/include -g 
+
+#compile 'mainMenu-button'
+obj/mainMenu-button.o: src/objects/gui/mainMenu-button.cpp src/objects/gui/mainMenu-button.h src/Game.h src/objects/visible-object-manager.h
+	g++ -c src/objects/gui/mainMenu-button.cpp -o obj/mainMenu-button.o -ID:/SFML-2.5.1/include -g 
 
 #compile 'field'
 obj/field.o: src/objects/entities/field.cpp src/objects/entities/field.h src/Game.h src/objects/visible-object-manager.h

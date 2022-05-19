@@ -4,30 +4,44 @@
 #include "Menu-state.h"
 #include "one-player-state.h"
 #include "two-player-state.h"
+#include "pause-state.h"
 
 namespace pong {
   StateManager::StateManager() {
-    this->newStateID = SplashScreen;
+    this->togoStateID = None;
+  }
+
+  StateID StateManager::toGoStateID() {
+    return this->togoStateID;
   }
 
   void StateManager::init() {
     this->addState(SplashScreen);
   }
 
+  //////////////////////////////////////////////////////////////////////////////
   int StateManager::processStateChange() {
+    while ((this->togoStateID != None) && (!this->states.empty()) && (this->states.top()->getID() != this->togoStateID)) {
+      delete this->states.top();
+      this->states.pop();
+    }
+    this->togoStateID = None;
+
     if (!this->states.empty() && this->states.top()->hasClosed()) {
       delete this->states.top();
       this->states.pop();
     }
-    if (!this->newState->hasEntered()) {
+    if (this->newState) {
       if (this->newState->init() != 0) {
         return -1;
       }
       this->newState->enter();
       this->states.push(this->newState);
+      this->newState = nullptr;
     }
     return 0;
   }
+  //////////////////////////////////////////////////////////////////////////////
 
   void StateManager::addState(StateID stateID) {
     switch (stateID) {
@@ -50,11 +64,23 @@ namespace pong {
         this->newState = new TwoPlayerState(Game::data);
         break;
         
-      case GameOver:
-        // this->newState = new GameOverState();
+      case Pause:
+        this->newState = new PauseState(Game::data);
         break;
     }
     this->newState->setNewState();
+  }
+
+  void StateManager::switchTo(StateID stateID) {
+    this->togoStateID = stateID;
+  }
+
+  void StateManager::closeCurrentState() {
+    this->states.top()->close();
+  }
+
+  void StateManager::clearToGoState() {
+    this->togoStateID = None;
   }
 
   void StateManager::handleInput() {
@@ -65,7 +91,7 @@ namespace pong {
     this->states.top()->update(elapsedTime);
   }
 
-  void StateManager::render(float interpolation) {
+  void StateManager::render() {
     this->states.top()->render();
   }
 

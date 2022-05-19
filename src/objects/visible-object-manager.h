@@ -9,14 +9,13 @@ namespace pong {
     public:
       VisibleObjectManager() = default;
       ~VisibleObjectManager();
-      void handleInput(sf::Event &event);
-      void update(float elapsedTime);
-      void draw();
+      void handleInput(sf::Event &event, char stateSignal);
+      void update(float elapsedTime, char stateSignal);
+      void draw(char stateSignal);
       void addObject(std::string name, VisibleObject *object);
       void removeObject(std::string name);
       void clearObjects();
       VisibleObject *getObject(std::string name);
-      int getObjectCount();
     private:
       std::map<std::string, VisibleObject *> objects;
   };

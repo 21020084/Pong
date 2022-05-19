@@ -1,4 +1,4 @@
-#ifndef MENU_STATE_H
+#ifndef PAUSE_STATE_H
 #define PAUSE_STATE_H
 
 #include "Game-state.h"

@@ -3,6 +3,10 @@
 namespace pong {
   GameState::GameState(GameDataRef _data) : data(_data) {}
 
+  StateID GameState::getID() {
+    return this->m_ID;
+  }
+
   bool GameState::hasEntered() {
     return this->m_hasEntered;
   }
@@ -13,6 +17,10 @@ namespace pong {
 
   void GameState::enter() {
     this->m_hasEntered = true;
+  }
+
+  void GameState::close() {
+    this->m_hasClosed = true;
   }
 
   void GameState::setNewState() {

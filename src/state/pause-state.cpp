@@ -1,11 +1,12 @@
 #include "../Game.h"
 #include "pause-state.h"
-#include "../objects/gui/exit-button.h"
-#include "../objects/gui/one-player-button.h"
-#include "../objects/gui/two-player-button.h"
+#include "../objects/gui/resume-button.h"
+#include "../objects/gui/mainMenu-button.h"
 
 namespace pong {
-  PauseState::PauseState(GameDataRef _data) : GameState(_data) {}
+  PauseState::PauseState(GameDataRef _data) : GameState(_data) {
+    this->m_ID = Pause;
+  }
 
   int PauseState::init() {
     if (!m_backgroundTexture.loadFromFile("assets/pause.png")) {
@@ -15,17 +16,13 @@ namespace pong {
     m_backgroundSprite.setTexture(m_backgroundTexture);
 
     /// Add buttons to the Pause
-    OnePlayerButton *onePlayerButton = new OnePlayerButton(this->data);
-    onePlayerButton->setPosition(390, 400);
-    this->data->visibleObjectManager.addObject("onePlayerButton", onePlayerButton);
+    ResumeButton *resumeButton = new ResumeButton(this->data);
+    resumeButton->setPosition(390, 450);
+    this->data->visibleObjectManager.addObject("P_resumeButton", resumeButton);
 
-    TwoPlayerButton *twoPlayerButton = new TwoPlayerButton(this->data);
-    twoPlayerButton->setPosition(390, 550);
-    this->data->visibleObjectManager.addObject("twoPlayerButton", twoPlayerButton);
-
-    ExitButton *exitButton = new ExitButton(this->data);
-    exitButton->setPosition(390, 700);
-    this->data->visibleObjectManager.addObject("exitButton", exitButton);
+    MainMenuButton *mainMenuButton = new MainMenuButton(this->data);
+    mainMenuButton->setPosition(390, 600);
+    this->data->visibleObjectManager.addObject("P_mainMenuButton", mainMenuButton);
 
     return 0;
   }
@@ -37,26 +34,32 @@ namespace pong {
     sf::Event event;
     while (this->data->window.pollEvent(event)) {
       /// If the user wants to quit the game
-      if (event.type == sf::Event::Closed ||
-          sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+      if (event.type == sf::Event::Closed) {
         this->m_hasClosed  = true;
         this->data->window.close();
+        continue;
+      }
+      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+        this->m_hasClosed  = true;
+        this->data->stateManager.closeCurrentState();
+        continue;
       }
     }
 
     /// Check if the user clicked on the buttons
-    this->data->visibleObjectManager.handleInput(event);
+    this->data->visibleObjectManager.handleInput(event, 'P');
     this->data->cursor.loadFromSystem(VisibleObject::CursorType);
     this->data->window.setMouseCursor(this->data->cursor);
   }
   
   void PauseState::update(float timeElapsed) {
-    this->data->visibleObjectManager.update(timeElapsed);
+    this->data->visibleObjectManager.update(timeElapsed, 'P');
   }
 
   void PauseState::render() {
+    this->data->window.clear();
     this->data->window.draw(m_backgroundSprite);
-    this->data->visibleObjectManager.draw();
+    this->data->visibleObjectManager.draw('P');
     this->data->window.display();
   }
 }

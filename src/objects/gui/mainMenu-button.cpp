@@ -12,7 +12,8 @@ namespace pong {
   ///////////////////
   ///    TODO:   ////  
   ///////////////////
-        this->data->stateManager.addState(Menu);
+        this->data->stateManager.closeCurrentState();
+        this->data->stateManager.switchTo(Menu);
       }
     }
     

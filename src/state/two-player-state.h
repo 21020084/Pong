@@ -8,6 +8,7 @@ namespace pong {
     class TwoPlayerState : public GameState {
       public:
         TwoPlayerState (GameDataRef _data);
+        ~TwoPlayerState();
 
         int init() override;
         void handleInput() override;

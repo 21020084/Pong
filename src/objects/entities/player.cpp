@@ -67,7 +67,7 @@ namespace pong {
       return;
     }
 
-    Ball *ball = dynamic_cast<Ball*>(this->data->visibleObjectManager.getObject("ball"));
+    Ball *ball = dynamic_cast<Ball*>(this->data->visibleObjectManager.getObject("O_ball"));
     if (ball == nullptr) {
       return;
     }

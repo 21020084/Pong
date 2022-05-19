@@ -41,8 +41,7 @@ namespace pong {
         accumulator -= dt;
       }
 
-      interpolation = accumulator / dt;
-      data->stateManager.render(interpolation);
+      data->stateManager.render();
     }
   }
 }

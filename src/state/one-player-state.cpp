@@ -13,20 +13,29 @@ namespace pong {
   OnePlayerState::OnePlayerState(GameDataRef _data) : GameState(_data) {
     this->score1 = 0;
     this->score2 = 0;
+    this->m_ID = OnePlayer;
+  }
+
+  OnePlayerState::~OnePlayerState() {
+    this->data->visibleObjectManager.removeObject("O_Field");
+    this->data->visibleObjectManager.removeObject("O_Player1");
+    this->data->visibleObjectManager.removeObject("O_Player2");
+    this->data->visibleObjectManager.removeObject("O_ball");
   }
 
   int OnePlayerState::init() {
+
     this->data->cursor.loadFromSystem(sf::Cursor::Arrow);
     this->data->window.setMouseCursor(this->data->cursor);
-    /// Remove all objects from the visible object manager
-    this->data->visibleObjectManager.clearObjects();
+    // /// Remove all objects of the previous state
+    // this->data->visibleObjectManager.clearObjects();
 
 
     /*******************Initialize the game objects****************************/
     Field *field = new Field(Game::data);
     field->setPosition(0, 0);
     /// Object added to the visible object manager
-    this->data->visibleObjectManager.addObject("Field", field);
+    this->data->visibleObjectManager.addObject("O_Field", field);
 
     ////////////////////////////////////////////////////////////////////////////
     float leftEdge = field->getLeft();
@@ -44,7 +53,7 @@ namespace pong {
     /// Player1 is controlled by the computer 
     player1->setAI(true);
     /// Object added to the visible object manager
-    this->data->visibleObjectManager.addObject("Player1", player1);
+    this->data->visibleObjectManager.addObject("O_Player1", player1);
     ////////////////////////////////////////////////////////////////////////////
 
     /////////////////////////////////Right player///////////////////////////////
@@ -52,7 +61,7 @@ namespace pong {
     player2->setPosition(rightEdge - player2->getBoundingBox().width - 10, 
                         topEdge + height / 2 - player2->getBoundingBox().height / 2);
     /// Object added to the visible object manager
-    this->data->visibleObjectManager.addObject("Player2", player2);
+    this->data->visibleObjectManager.addObject("O_Player2", player2);
     ////////////////////////////////////////////////////////////////////////////
 
     ////////////////////////////////////////////////////////////////////////////
@@ -61,7 +70,7 @@ namespace pong {
     /// Set default position of the ball
     ball->resetPosition(player1, player2);
     /// Object added to the visible object manager
-    this->data->visibleObjectManager.addObject("ball", ball);
+    this->data->visibleObjectManager.addObject("O_ball", ball);
     ////////////////////////////////////////////////////////////////////////////
 
     /**************************************************************************/
@@ -97,10 +106,10 @@ namespace pong {
         this->data->window.close();
       }
       /// Check if the user wants to pause the game
-      // if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
-      //   this->data->gameStateManager.pushState(GameStateType::PAUSE);
-      // }
-      this->data->visibleObjectManager.handleInput(event);
+      if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
+        this->data->stateManager.addState(Pause);
+      }
+      this->data->visibleObjectManager.handleInput(event, 'O');
     }
   }
 
@@ -108,7 +117,7 @@ namespace pong {
 
   void OnePlayerState::handleTurnChanging() {
     /******* Reset ball position if it is out of the field *******/    
-    Ball *ball = dynamic_cast<Ball*> (this->data->visibleObjectManager.getObject("ball"));
+    Ball *ball = dynamic_cast<Ball*> (this->data->visibleObjectManager.getObject("O_ball"));
     if (!ball) {
       throw std::runtime_error("Ball not found");
     }
@@ -118,16 +127,16 @@ namespace pong {
       this->score2++;
       this->scoreText2.setString(std::to_string(this->score2));
       // std::this_thread::sleep_for(std::chrono::milliseconds(1000)); 
-      ball->resetPosition(this->data->visibleObjectManager.getObject("Player1"),
-                          this->data->visibleObjectManager.getObject("Player2"));
+      ball->resetPosition(this->data->visibleObjectManager.getObject("O_Player1"),
+                          this->data->visibleObjectManager.getObject("O_Player2"));
     } else {
       this->score1++;
       if (score1 == 1)
         debug = 1;
       this->scoreText1.setString(std::to_string(this->score1));
       // std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-      ball->resetPosition(this->data->visibleObjectManager.getObject("Player1"),
-                          this->data->visibleObjectManager.getObject("Player2"));
+      ball->resetPosition(this->data->visibleObjectManager.getObject("O_Player1"),
+                          this->data->visibleObjectManager.getObject("O_Player2"));
     }
     ball->setOut(false);
     ball->addSpeed(0.5f);
@@ -142,19 +151,19 @@ namespace pong {
 
 
     /*********** Reset and update player ***********/
-    Player *player1 = dynamic_cast<Player*> (this->data->visibleObjectManager.getObject("Player1"));
+    Player *player1 = dynamic_cast<Player*> (this->data->visibleObjectManager.getObject("O_Player1"));
     if (!player1) {
       throw std::runtime_error("Player1 not found");
     }
     player1->resetFreezeTimer();
 
-    Player *player2 = dynamic_cast<Player*> (this->data->visibleObjectManager.getObject("Player2"));
+    Player *player2 = dynamic_cast<Player*> (this->data->visibleObjectManager.getObject("O_Player2"));
     if (!player2) {
       throw std::runtime_error("Player1 not found");
     }
     player2->resetFreezeTimer();
 
-    if (ball->getSpeed()  - this->ballSpeed >= 3.0f) {
+    if (ball->getSpeed()  - this->ballSpeed >= 5.0f) {
       this->ballSpeed = ball->getSpeed();
       player1->addSpeed(0.6f);
       player2->addSpeed(0.6f);
@@ -165,7 +174,7 @@ namespace pong {
   }
 
   void OnePlayerState::update(float timeElapsed) {
-    this->data->visibleObjectManager.update(timeElapsed);
+    this->data->visibleObjectManager.update(timeElapsed, 'O');
 
     this->handleTurnChanging();
 
@@ -175,7 +184,7 @@ namespace pong {
 
   void OnePlayerState::render() {
     this->data->window.clear(sf::Color::White);
-    this->data->visibleObjectManager.draw();
+    this->data->visibleObjectManager.draw('O');
     this->data->window.draw(this->scoreText1);
     this->data->window.draw(this->scoreText2);
     this->data->window.display();
