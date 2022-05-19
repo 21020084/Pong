@@ -33,7 +33,7 @@
   - Góc phát bóng ở mỗi lượt chơi là ngẫu nhiên.
   - Tốc độ di chuyển của bóng và hai tấm ván tăng dần, đều sau các lượt chơi.
   - Sau 50 lượt chơi, bóng và hai tấm ván sẽ đạt tốc độ tối đa.
-  - Có thể tạm dừng màn chơi bằng cách nhấn ***Esc***, khi đó Menu tạm dừng sẽ xuất hiện.
+  - Có thể tạm dừng/tiếp tục màn chơi bằng cách nhấn ***Esc***, khi đó Menu tạm dừng sẽ xuất hiện.
  * **Âm thanh: Gồm 3 loại**
   - Tiếng bóng chạm vào các tấm ván.
   - Tiếng bóng chạm vào cạnh trên hoặc dưới của màn hình.
