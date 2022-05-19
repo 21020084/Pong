@@ -9,9 +9,6 @@ namespace pong {
       int x = event.mouseButton.x;
       int y = event.mouseButton.y;
       if (this->getBoundingBox().contains(x, y)) {
-  ///////////////////
-  ///    TODO:   ////  
-  ///////////////////
         this->data->stateManager.closeCurrentState();
         this->data->stateManager.switchTo(Menu);
       }

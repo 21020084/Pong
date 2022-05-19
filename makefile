@@ -7,12 +7,12 @@ bin/pong.exe: obj/main.o obj/Game.o obj/state-manager.o obj/Game-state.o obj/spl
 	g++ obj/main.o \
       obj/Game.o \
       obj/state-manager.o \
-			obj/Game-state.o \
+      obj/Game-state.o \
       obj/splashScreen-state.o \
-			obj/Menu-state.o \
-			obj/one-player-state.o \
-			obj/two-player-state.o \
-			obj/pause-state.o \
+      obj/Menu-state.o \
+      obj/one-player-state.o \
+      obj/two-player-state.o \
+      obj/pause-state.o \
       obj/visible-object-manager.o \
       obj/visible-object.o \
       obj/exit-button.o \
@@ -20,9 +20,9 @@ bin/pong.exe: obj/main.o obj/Game.o obj/state-manager.o obj/Game-state.o obj/spl
       obj/two-player-button.o \
       obj/resume-button.o \
       obj/mainMenu-button.o \
-			obj/field.o \
-			obj/ball.o \
-			obj/player.o \
+      obj/field.o \
+      obj/ball.o \
+      obj/player.o \
   -o bin/pong.exe \
   -Llib -lsfml-graphics -lsfml-window -lsfml-system -lsfml-network -lsfml-audio
 
