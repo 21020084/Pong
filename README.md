@@ -24,16 +24,20 @@
 #### *(Lưu ý: Chức năng của các nút bấm giống tên gọi của nó)*
 * **Menu chính:**
   Gồm 3 nút bấm: Chơi đơn, Chơi hai người và Thoát trò chơi.
-* **Menu tạm dừng**
+* **Menu tạm dừng:**
   - Gồm 2 nút bấm: Tiếp tục và Về menu chính.
   - Xuất hiện khi trò chơi đang tạm dừng giữa màn chơi.  
-* **Màn chơi**
-  - Gồm 2 chế đọ: Choi đơn và Chơi hai người.
+* **Màn chơi:**
+  - Gồm 2 chế đọ: Chơi đơn và Chơi hai người.
   - Ở lượt chơi đầu tiên, người chơi bên phải phát bóng trước. Sau đó người thắng một lượt chơi sẽ được phát bóng ở lượt tiếp theo.
   - Góc phát bóng ở mỗi lượt chơi là ngẫu nhiên.
   - Tốc độ di chuyển của bóng và hai tấm ván tăng dần, đều sau các lượt chơi.
   - Sau 50 lượt chơi, bóng và hai tấm ván sẽ đạt tốc độ tối đa.
-
+  - Có thể tạm dừng màn chơi bằng cách nhấn ***Esc***, khi đó Menu tạm dừng sẽ xuất hiện.
+ * **Âm thanh: Gồm 3 loại**
+  - Tiếng bóng chạm vào các tấm ván.
+  - Tiếng bóng chạm vào cạnh trên hoặc dưới của màn hình.
+  - Âm thanh kết thúc lượt chơi, bóng chạm vào cạnh trái hoặc phải của màn hình.  
 
 ### 4. CÁC KỸ THUẬT LẬP TRÌNH VÀ CẤU TRÚC DỮ LIỆU 
 ### 5. TỔNG KẾT
