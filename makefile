@@ -1,6 +1,6 @@
 #run the application
 run: bin/pong.exe
-	bin/pong
+	(cd bin && ./pong)
 
 #create the executable file
 bin/pong.exe: obj/main.o obj/Game.o obj/state-manager.o obj/Game-state.o obj/splashScreen-state.o obj/Menu-state.o obj/one-player-state.o obj/two-player-state.o obj/pause-state.o obj/visible-object-manager.o obj/visible-object.o obj/exit-button.o obj/one-player-button.o obj/two-player-button.o obj/resume-button.o obj/mainMenu-button.o obj/field.o obj/ball.o obj/player.o
