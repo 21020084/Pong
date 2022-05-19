@@ -73,7 +73,7 @@ namespace pong {
     }
     
     /// The AI start moving
-    if (ball->getPosition().x - this->getPosition().x >= SCREEN_WIDTH / 2 - 50) return;
+    if (ball->getPosition().x - this->getPosition().x >= SCREEN_WIDTH / 2 - 200) return;
 
     float ballY = ball->getPosition().y;
     float playerY = this->getPosition().y;
