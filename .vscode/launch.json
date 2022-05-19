@@ -8,9 +8,9 @@
           "program": "${workspaceFolder}\\bin\\${workspaceFolderBasename}.exe",
           "args": [],
           "stopAtEntry": false,
-          "cwd": "${workspaceFolder}",
+          "cwd": "${workspaceFolder}/bin",
           "environment": [],
-          "intergratedTerminal": true,
+          // "intergratedTerminal": true,
           "MIMode": "gdb",
           "miDebuggerPath": "gdb.exe",
           "setupCommands": [

@@ -30,7 +30,7 @@ namespace pong {
   }
 
   void Ball::resetPosition(VisibleObject *player1, VisibleObject *player2) {
-    if (this->collidedWith == LEFT) {
+    if (this->getLeft() > SCREEN_WIDTH / 2) {
       this->setPosition(player1->getPosition().x + 15.0f, player1->getPosition().y + 65.0f);
     } else {
       this->setPosition(player2->getPosition().x - 34.0f, player2->getPosition().y + 65.0f);

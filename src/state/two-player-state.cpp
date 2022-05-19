@@ -111,8 +111,6 @@ namespace pong {
     }
   }
 
-  static int debug = 0;
-
   void TwoPlayerState::handleTurnChanging() {
     /******* Reset ball position if it is out of the field *******/    
     Ball *ball = dynamic_cast<Ball*> (this->data->visibleObjectManager.getObject("T_ball"));
@@ -121,7 +119,7 @@ namespace pong {
     }
     if (!ball->isOut()) return;
 
-    if (ball->collidedWith == Ball::CollidedWith::RIGHT) {
+    if (ball->getLeft() < SCREEN_WIDTH / 2) {
       this->score2++;
       this->scoreText2.setString(std::to_string(this->score2));
       // std::this_thread::sleep_for(std::chrono::milliseconds(1000)); 
@@ -129,8 +127,6 @@ namespace pong {
                           this->data->visibleObjectManager.getObject("T_Player2"));
     } else {
       this->score1++;
-      if (score1 == 1)
-        debug = 1;
       this->scoreText1.setString(std::to_string(this->score1));
       // std::this_thread::sleep_for(std::chrono::milliseconds(1000));
       ball->resetPosition(this->data->visibleObjectManager.getObject("T_Player1"),
@@ -161,7 +157,7 @@ namespace pong {
     }
     player2->resetFreezeTimer();
 
-    if (ball->getSpeed()  - this->ballSpeed >= 2.5f) {
+    if (ball->getSpeed()  - this->ballSpeed >= 2.0f) {
       this->ballSpeed = ball->getSpeed();
       player1->addSpeed(3.2f);
       player2->addSpeed(3.2f);
@@ -180,7 +176,11 @@ namespace pong {
       VisibleObject::previousCursorType = VisibleObject::currentCursorType;
     }
 
-    this->data->visibleObjectManager.update(timeElapsed, 'T');
+    /// Check if the ball is out of bounds
+    Ball *ball = dynamic_cast<Ball*> (this->data->visibleObjectManager.getObject("T_ball"));
+    if (!ball->isOut()) {
+      this->data->visibleObjectManager.update(timeElapsed, 'T');
+    }
 
     this->handleTurnChanging();
 
