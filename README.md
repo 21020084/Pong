@@ -44,7 +44,7 @@
   - Dùng con trỏ và tham chiếu.
   - Lập trình hướng đối tượng.
 * **Các cấu trúc dữ liệu**
-  - std::map: Dùng để lưu và quản lý các đối tượng (nút bấm, bóng, tấm ván,...) của trò chơi. 
-  - std::stack: Dùng để lưu và quản lý các trạng thái (chơi đơn, chơi hai người, tạm dừng,...) của trò chơi.
-  - std::shared_ptr: Dùng với mục đích giảm bớt tham số cần bởi những phương thức giống nhau của các đối tượng khác nhau.
+  - *std::map*:  Dùng để lưu và quản lý các đối tượng (nút bấm, bóng, tấm ván,...) của trò chơi. 
+  - *std::stack*:  Dùng để lưu và quản lý các trạng thái (chơi đơn, chơi hai người, tạm dừng,...) của trò chơi.
+  - *std::shared_ptr*:  Dùng với mục đích giảm bớt tham số cần bởi những phương thức giống nhau của các đối tượng khác nhau.
 ### 5. TỔNG KẾT
