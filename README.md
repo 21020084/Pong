@@ -15,7 +15,7 @@
 * **Ý tưởng:**
   Lấy ý tương từ trò chơi Pong cổ diển.
 * **Mô tả chung:**
-  - Hai tấm ván được điều khiển di chuyển dọc theo hai bức tường đối diện nhau, trong một hộp kín.
+  - Hai tấm ván được điều khiển di chuyển dọc theo hai bức tường đối diện nhau, trong một hộp kín là màn hình.
   - Nhiệm vụ của người chơi là ngăn quả bóng chạm vào bức tường phía mình. Nếu để bóng chạm tường, đối thủ của người chơi sẽ được cộng 1 điểm và lượt chơi đó sẽ kết thúc.
   - Có 2 chế độ chơi: chơi đơn và chơi hai người. Ở chế độ chơi đơn, một tấm ván sẽ do máy tính điều khiển.
 
@@ -40,11 +40,14 @@
   - Âm thanh kết thúc lượt chơi, bóng chạm vào cạnh trái hoặc phải của màn hình.  
 
 ### 4. CÁC KỸ THUẬT LẬP TRÌNH VÀ CẤU TRÚC DỮ LIỆU 
-* **Kỹ thuật lập trình**
+* **Kỹ thuật lập trình:**
   - Dùng con trỏ và tham chiếu.
   - Lập trình hướng đối tượng.
-* **Các cấu trúc dữ liệu**
+* **Các cấu trúc dữ liệu:**
   - *std::map*:  Dùng để lưu và quản lý các đối tượng (nút bấm, bóng, tấm ván,...) của trò chơi. 
   - *std::stack*:  Dùng để lưu và quản lý các trạng thái (chơi đơn, chơi hai người, tạm dừng,...) của trò chơi.
   - *std::shared_ptr*:  Dùng với mục đích giảm bớt tham số cần bởi những phương thức giống nhau của các đối tượng khác nhau.
 ### 5. TỔNG KẾT
+* **Kết luận:**
+  - Đây là một dự án đơn giản viết bằng ngôn ngữ C++ kết hợp thư viện SFML, sử dụng Lập trình hướng đối tượng.
+  - Kỹ thuật Lập trình hướng đối tượng trong dự án này chỉ dùng lại ở mức cơ bản, chỉ được dùng nhằm mục đích làm quen với các tính chát và cách tổ chức cơ bản của Lập trình hướng đối tượng. 
