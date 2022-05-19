@@ -34,10 +34,17 @@
   - Tốc độ di chuyển của bóng và hai tấm ván tăng dần, đều sau các lượt chơi.
   - Sau 50 lượt chơi, bóng và hai tấm ván sẽ đạt tốc độ tối đa.
   - Có thể tạm dừng/tiếp tục màn chơi bằng cách nhấn ***Esc***, khi đó Menu tạm dừng sẽ xuất hiện.
- * **Âm thanh: Gồm 3 loại**
+* **Âm thanh: Gồm 3 loại**
   - Tiếng bóng chạm vào các tấm ván.
   - Tiếng bóng chạm vào cạnh trên hoặc dưới của màn hình.
   - Âm thanh kết thúc lượt chơi, bóng chạm vào cạnh trái hoặc phải của màn hình.  
 
 ### 4. CÁC KỸ THUẬT LẬP TRÌNH VÀ CẤU TRÚC DỮ LIỆU 
+* **Kỹ thuật lập trình**
+  - Dùng con trỏ và tham chiếu.
+  - Lập trình hướng đối tượng.
+* **Các cấu trúc dữ liệu**
+  - std::map: Dùng để lưu và quản lý các đối tượng (nút bấm, bóng, tấm ván,...) của trò chơi. 
+  - std::stack: Dùng để lưu và quản lý các trạng thái (chơi đơn, chơi hai người, tạm dừng,...) của trò chơi.
+  - std::shared_ptr: Dùng với mục đích giảm bớt tham số cần bởi những phương thức giống nhau của các đối tượng khác nhau.
 ### 5. TỔNG KẾT
