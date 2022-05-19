@@ -17,6 +17,7 @@ namespace pong {
 
     this->ballOutSoundBuffer.loadFromFile("assets/ball_out.wav");
     this->ballOutSound.setBuffer(this->ballOutSoundBuffer);
+    this->ballOutSound.setVolume(30);
     /// Load ball hit sound
     this->ballHitSoundBuffer.resize(2);
     this->ballHitSoundBuffer[0].loadFromFile("assets/ball_hit(0).wav");
