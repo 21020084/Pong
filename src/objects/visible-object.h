@@ -15,7 +15,8 @@ namespace pong {
       VisibleObject(std::string textureFilename, GameDataRef _data);
       VisibleObject(std::string textureFilename);
       virtual ~VisibleObject() = default;
-      static sf::Cursor::Type CursorType;
+      static sf::Cursor::Type currentCursorType;
+      static sf::Cursor::Type previousCursorType;
 
       virtual void loadTexture(std::string textureFilename);
       virtual void handleInput(sf::Event &event) = 0;

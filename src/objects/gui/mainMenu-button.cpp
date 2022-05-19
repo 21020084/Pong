@@ -18,7 +18,7 @@ namespace pong {
     int x = mouse.x;
     int y = mouse.y;
     if (this->getBoundingBox().contains(x, y)) {
-      this->CursorType = sf::Cursor::Hand;
+      this->currentCursorType = sf::Cursor::Hand;
     } 
   }
 }

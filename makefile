@@ -67,7 +67,7 @@ obj/one-player-state.o: src/state/one-player-state.cpp src/state/one-player-stat
 	g++ -c src/state/one-player-state.cpp -o obj/one-player-state.o -Iinclude -g
 
 #update one-player-state.cpp
-src/state/one-player-state.cpp: src/objects/visible-object.h src/objects/entities/field.h src/objects/entities/ball.h src/objects/entities/player.h 
+src/state/one-player-state.cpp: src/objects/visible-object.h src/objects/entities/field.h src/objects/entities/ball.h src/objects/entities/player.h src/DEFINITION.h 
 	touch src/state/one-player-state.cpp
 
 #compile 'two-player-state'
@@ -75,7 +75,7 @@ obj/two-player-state.o: src/state/two-player-state.cpp src/state/two-player-stat
 	g++ -c src/state/two-player-state.cpp -o obj/two-player-state.o -Iinclude -g
 
 #update two-player-state.cpp
-src/state/two-player-state.cpp: src/objects/visible-object.h src/objects/entities/field.h src/objects/entities/ball.h src/objects/entities/player.h 
+src/state/two-player-state.cpp: src/objects/visible-object.h src/objects/entities/field.h src/objects/entities/ball.h src/objects/entities/player.h src/DEFINITION.h
 	touch src/state/two-player-state.cpp
 
 #compile 'pause-state'
@@ -123,5 +123,5 @@ obj/ball.o: src/objects/entities/ball.cpp src/objects/entities/ball.h src/Game.h
 	g++ -c src/objects/entities/ball.cpp -o obj/ball.o -Iinclude -g 
 
 #compile 'player'
-obj/player.o: src/objects/entities/player.cpp src/objects/entities/player.h src/Game.h src/objects/visible-object-manager.h
+obj/player.o: src/objects/entities/player.cpp src/objects/entities/player.h src/Game.h src/objects/visible-object-manager.h src/DEFINITION.h
 	g++ -c src/objects/entities/player.cpp -o obj/player.o -Iinclude -g 

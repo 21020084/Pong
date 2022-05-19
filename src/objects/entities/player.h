@@ -15,7 +15,7 @@ namespace pong {
       void resetFreezeTimer();
       bool isAI();
       float getSpeed();
-      void addSpeed(float speed);
+      bool addSpeed(float speed);
 
     private:
       // GameDataRef data;
@@ -30,7 +30,8 @@ namespace pong {
       };
 
       Direction direction = NONE;
-      float speed = 15.5f;
+      float speed;
+      float maxSpeed;
       float constrainTop = 0.0f;
       float constrainBottom = 0.0f;
   };

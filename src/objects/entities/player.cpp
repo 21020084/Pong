@@ -9,7 +9,9 @@ namespace pong {
     this->constrainBottom = Bottom;
     this->left = isLeft;
     this->ai = false;
-    this->freezeTimer = 1.0f;
+    this->freezeTimer = FREEZING_TIME;
+    this->speed = PLAYER_BASE_SPEED;
+    this->maxSpeed = PLAYER_MAX_SPEED;
   }
 
   void Player::handleInput(sf::Event &event) {
@@ -73,7 +75,7 @@ namespace pong {
     }
     
     /// The AI start moving
-    if (ball->getPosition().x - this->getPosition().x >= SCREEN_WIDTH / 2 - 200) return;
+    if (std::abs(ball->getPosition().x - this->getPosition().x) >= SCREEN_WIDTH / 2 - 200) return;
 
     float ballY = ball->getPosition().y;
     float playerY = this->getPosition().y;
@@ -112,7 +114,11 @@ namespace pong {
     return this->speed;
   }
 
-  void Player::addSpeed(float _speed) {
+  bool Player::addSpeed(float _speed) {
+    if (this->speed + _speed > this->maxSpeed) {
+      return false;
+    }
     this->speed += _speed;
+    return true;
   }
 }

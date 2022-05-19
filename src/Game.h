@@ -30,7 +30,7 @@ namespace pong {
 
     private:
       // Updates run at 60 per second.
-		  static constexpr float dt = 1.0f / 60.0f;
+      static constexpr float dt = 1.0f / 60.0f;
       static sf::Clock clock;
   };
 }

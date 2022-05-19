@@ -28,7 +28,7 @@ namespace pong {
   }
 
   void PauseState::handleInput() {
-    VisibleObject::CursorType = sf::Cursor::Arrow;
+    VisibleObject::currentCursorType = sf::Cursor::Arrow;
 
     /// Check if the user want to quit the game
     sf::Event event;
@@ -48,8 +48,13 @@ namespace pong {
 
     /// Check if the user clicked on the buttons
     this->data->visibleObjectManager.handleInput(event, 'P');
-    this->data->cursor.loadFromSystem(VisibleObject::CursorType);
-    this->data->window.setMouseCursor(this->data->cursor);
+
+    /// Handle the cursor
+    if (VisibleObject::currentCursorType != VisibleObject::previousCursorType) {
+      this->data->cursor.loadFromSystem(VisibleObject::currentCursorType);
+      this->data->window.setMouseCursor(this->data->cursor);
+      VisibleObject::previousCursorType = VisibleObject::currentCursorType;
+    }
   }
   
   void PauseState::update(float timeElapsed) {

@@ -60,6 +60,7 @@ namespace pong {
     Player *player2 = new Player(topEdge - 10, bottomEdge - 10, false, Game::data);
     player2->setPosition(rightEdge - player2->getBoundingBox().width - 10, 
                         topEdge + height / 2 - player2->getBoundingBox().height / 2);
+    // player2->setAI(true);
     /// Object added to the visible object manager
     this->data->visibleObjectManager.addObject("O_Player2", player2);
     ////////////////////////////////////////////////////////////////////////////
@@ -139,7 +140,7 @@ namespace pong {
                           this->data->visibleObjectManager.getObject("O_Player2"));
     }
     ball->setOut(false);
-    ball->addSpeed(0.5f);
+    ball->addSpeed(0.4f);
     ball->resetFreezeTimer();
     /// Reload the angle of the ball
     if (ball->collidedWith == Ball::CollidedWith::RIGHT) {
@@ -163,10 +164,10 @@ namespace pong {
     }
     player2->resetFreezeTimer();
 
-    if (ball->getSpeed()  - this->ballSpeed >= 5.0f) {
+    if (ball->getSpeed()  - this->ballSpeed >= 2.0f) {
       this->ballSpeed = ball->getSpeed();
-      player1->addSpeed(0.6f);
-      player2->addSpeed(0.6f);
+      player1->addSpeed(3.2f);
+      player2->addSpeed(3.2f);
     }
     /************************************************/
 
@@ -174,6 +175,14 @@ namespace pong {
   }
 
   void OnePlayerState::update(float timeElapsed) {
+    VisibleObject::currentCursorType = sf::Cursor::Arrow;
+    /// Handle the cursor
+    if (VisibleObject::currentCursorType != VisibleObject::previousCursorType) {
+      this->data->cursor.loadFromSystem(VisibleObject::currentCursorType);
+      this->data->window.setMouseCursor(this->data->cursor);
+      VisibleObject::previousCursorType = VisibleObject::currentCursorType;
+    }
+
     this->data->visibleObjectManager.update(timeElapsed, 'O');
 
     this->handleTurnChanging();

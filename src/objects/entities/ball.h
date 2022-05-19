@@ -15,7 +15,7 @@ namespace pong {
       void update(float elapsedTime) override;
       void reset();
       float getSpeed();
-      void addSpeed(float _speed);
+      bool addSpeed(float _speed);
       float getAngle();
       void setAngle(float _angle);
       void resetFreezeTimer();

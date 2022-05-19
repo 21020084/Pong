@@ -7,12 +7,12 @@
 namespace pong {
   Ball::Ball(sf::FloatRect constraints, GameDataRef _data) : VisibleObject("assets/ball.png", _data) {
     this->speed = BALL_BASE_SPEED;
-    this->maxSpeed = 50.0f;
+    this->maxSpeed = BALL_MAX_SPEED;
     this->angle = 1.0f * (rand() % 161) + 100;
     // this->angle = -90.0f;
     this->constraints = constraints;
     this->is_out = false;
-    this->freezeTimer = 1.0f;
+    this->freezeTimer = FREEZING_TIME;
     this->collidedWith = RIGHT;
 
     this->ballOutSoundBuffer.loadFromFile("assets/ball_out.wav");
@@ -116,8 +116,12 @@ namespace pong {
     return this->speed;
   }
 
-  void Ball::addSpeed(float speed) {
+  bool Ball::addSpeed(float speed) {
+    if (this->speed + speed > this->maxSpeed) {
+      return false;
+    }
     this->speed += speed;
+    return true;
   }
 
   float Ball::getAngle() {
