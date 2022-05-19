@@ -48,6 +48,11 @@
   - *std::stack*:  Dùng để lưu và quản lý các trạng thái (chơi đơn, chơi hai người, tạm dừng,...) của trò chơi.
   - *std::shared_ptr*:  Dùng với mục đích giảm bớt tham số cần bởi những phương thức giống nhau của các đối tượng khác nhau.
 ### 5. TỔNG KẾT
-* **Kết luận:**
+* **Kết luận và hướng phát triển:**
   - Đây là một dự án đơn giản viết bằng ngôn ngữ C++ kết hợp thư viện SFML, sử dụng Lập trình hướng đối tượng.
-  - Kỹ thuật Lập trình hướng đối tượng trong dự án này chỉ dùng lại ở mức cơ bản, chỉ được dùng nhằm mục đích làm quen với các tính chát và cách tổ chức cơ bản của Lập trình hướng đối tượng. 
+  - Kỹ thuật Lập trình hướng đối tượng trong dự án này chỉ dùng lại ở mức cơ bản và còn nhiều sai sót.
+  - Cấu trúc *std::shared_ptr* có thể chưa được sử dụng đúng với tính năng ưu việt của nó.
+  - Một số thành phần có thể được thêm vào Game loop để làm trò chơi ổn định và mượt hơn.
+  - Một số phương thức có thể được viết thành một lớp riêng, thay vì nằm trong các đối tượng như hiện tại. Mục đích cuối cùng là có thể phát triển dự án hiện tại thành các dự án lớn hơn một cách dễ dàng hơn.
+* **Một số kinh nghiệm rút ra sau dự án:**
+  - 
