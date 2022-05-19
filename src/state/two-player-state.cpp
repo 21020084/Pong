@@ -111,8 +111,6 @@ namespace pong {
     }
   }
 
-  static int debug = 0;
-
   void TwoPlayerState::handleTurnChanging() {
     /******* Reset ball position if it is out of the field *******/    
     Ball *ball = dynamic_cast<Ball*> (this->data->visibleObjectManager.getObject("T_ball"));
@@ -129,8 +127,6 @@ namespace pong {
                           this->data->visibleObjectManager.getObject("T_Player2"));
     } else {
       this->score1++;
-      if (score1 == 1)
-        debug = 1;
       this->scoreText1.setString(std::to_string(this->score1));
       // std::this_thread::sleep_for(std::chrono::milliseconds(1000));
       ball->resetPosition(this->data->visibleObjectManager.getObject("T_Player1"),
