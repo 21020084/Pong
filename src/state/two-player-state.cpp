@@ -161,7 +161,7 @@ namespace pong {
     }
     player2->resetFreezeTimer();
 
-    if (ball->getSpeed()  - this->ballSpeed >= 2.5f) {
+    if (ball->getSpeed()  - this->ballSpeed >= 2.0f) {
       this->ballSpeed = ball->getSpeed();
       player1->addSpeed(3.2f);
       player2->addSpeed(3.2f);
