@@ -40,7 +40,7 @@
   - Tiếng bóng chạm vào cạnh trên hoặc dưới của màn hình.
   - Âm thanh kết thúc lượt chơi, bóng chạm vào cạnh trái hoặc phải của màn hình.
 
-**Link video demo:** ***https://youtu.be/fvR1D5d5crM***.
+**Link video demo:** ***https://www.youtube.com/watch?v=c5KbvcY_tPc***.
 
 ### 4. CÁC KỸ THUẬT LẬP TRÌNH VÀ CẤU TRÚC DỮ LIỆU 
 * **Kỹ thuật lập trình:**
