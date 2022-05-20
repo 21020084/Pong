@@ -17,7 +17,7 @@
 * **Mô tả chung:**
   - Hai tấm ván được điều khiển di chuyển dọc theo hai bức tường đối diện nhau, trong một hộp kín là màn hình.
   - Nhiệm vụ của người chơi là ngăn quả bóng chạm vào bức tường phía mình. Nếu để bóng chạm tường, đối thủ của người chơi sẽ được cộng 1 điểm và lượt chơi đó sẽ kết thúc.
-  - Có 2 chế độ chơi: chơi đơn và chơi hai người. Ở chế độ chơi đơn, một tấm ván sẽ do máy tính điều khiển.
+  - Có 2 chế độ chơi: chơi đơn và chơi hai người. Ở chế độ chơi đơn, tấm ván bên trái sẽ do máy tính điều khiển.
 
 
 ### 3. CÁC CHỨC NĂNG
