@@ -31,13 +31,15 @@
   - Gồm 2 chế đọ: Chơi đơn và Chơi hai người.
   - Ở lượt chơi đầu tiên, người chơi bên phải phát bóng trước. Sau đó người thắng một lượt chơi sẽ được phát bóng ở lượt tiếp theo.
   - Góc phát bóng ở mỗi lượt chơi là ngẫu nhiên.
-  - Tốc độ di chuyển của bóng và hai tấm ván tăng dần, đều sau các lượt chơi.
+  - Tốc độ di chuyển của bóng tăng đều sau mỗi lượt chơi, tốc độ di chuyển của hai tấm ván tăng đều sau mỗi 5 lượt chơi. 
   - Sau 50 lượt chơi, bóng và hai tấm ván sẽ đạt tốc độ tối đa.
   - Có thể tạm dừng/tiếp tục màn chơi bằng cách nhấn ***Esc***, khi đó Menu tạm dừng sẽ xuất hiện.
 * **Âm thanh: Gồm 3 loại**
   - Tiếng bóng chạm vào các tấm ván.
   - Tiếng bóng chạm vào cạnh trên hoặc dưới của màn hình.
-  - Âm thanh kết thúc lượt chơi, bóng chạm vào cạnh trái hoặc phải của màn hình.  
+  - Âm thanh kết thúc lượt chơi, bóng chạm vào cạnh trái hoặc phải của màn hình.
+
+**Link video demo:** ***https://youtu.be/fvR1D5d5crM***.
 
 ### 4. CÁC KỸ THUẬT LẬP TRÌNH VÀ CẤU TRÚC DỮ LIỆU 
 * **Kỹ thuật lập trình:**
@@ -59,3 +61,11 @@
   - Biết cách làm việc với *Makefile* và *command line (Git Bash)* ở mức cơ bản. 
   - Làm quen với Lập trình hướng đối tượng, một kỹ thuật quan trọng và rất phổ biến trong lập trình chuyên nghiệp.
   - Làm quen với một thư viện đồ họa viết bằng C++, biết thêm một số kiến thức về Lập trình hướng đối tượng thông qua API của thư viện này.
+
+
+#### Link tham khảo:
+* https://gameprogrammingpatterns.com/game-loop.html
+* http://blog.nuclex-games.com/tutorials/cxx/game-state-management/
+* https://gameprogrammingpatterns.com/component.html
+* https://medium.com/achiev/game-from-scratch-with-c-and-sfml-1-f17dcc2b6092
+* https://github.com/SonarSystems/Flappy-Bird-SFML-Clone
