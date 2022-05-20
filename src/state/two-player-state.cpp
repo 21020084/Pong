@@ -47,7 +47,7 @@ namespace pong {
 
     //////////////////////////////////Left player///////////////////////////////
     Player *player1 = new Player(topEdge + 10, bottomEdge - 10, true, Game::data);
-    player1->setPosition(leftEdge + 10, topEdge + height / 2 - player1->getBoundingBox().height / 2);
+    player1->setPosition(leftEdge - 10, topEdge + height / 2 - player1->getBoundingBox().height / 2);
     /// Object added to the visible object manager
     this->data->visibleObjectManager.addObject("T_Player1", player1);
     ////////////////////////////////////////////////////////////////////////////
