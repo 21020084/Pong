@@ -46,7 +46,7 @@ namespace pong {
     ////////////////////////////////////////////////////////////////////////////
 
     //////////////////////////////////Left player///////////////////////////////
-    Player *player1 = new Player(topEdge + 10, bottomEdge - 10, true, Game::data);
+    Player *player1 = new Player(topEdge - 10, bottomEdge - 10, true, Game::data);
     player1->setPosition(leftEdge + 10, topEdge + height / 2 - player1->getBoundingBox().height / 2);
     /// Player1 is controlled by the computer 
     player1->setAI(true);
