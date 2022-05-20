@@ -4,11 +4,12 @@
 
 
 ### 1. HƯỚNG DẪN CÀI ĐẶT 
-#### *(Lưu ý: File "pong.sh" dưới đây phải được chạy bằng phần mềm Git Bash)*
+#### *(Lưu ý: File *pong.sh* dưới đây phải được chạy bằng phần mềm Git Bash)*
  * Bước 1: Đồng bộ code về máy của bạn, sử dụng lệnh:
       **git clone https://github.com/21020084/Pong.git**.
- * Bước 2: Click chuột để chạy file "pong.sh" và đợi chương trình biên dịch xong.
- * Bước 3: Các lần tiếp theo chạy chương trình chỉ cần chạy file "pong.sh".
+ * Bước 2: Vào đường link *https://drive.google.com/file/d/1fQiOEtSXu8Furb8clbEqDjzjwq2VJMIo/view?usp=sharing* tải file *.zip*, sau đó giải nén đến thư mục *pong* vừa được đồng bộ về máy.
+ * Bước 2: Click chuột để chạy file *pong.sh* và đợi chương trình biên dịch xong.
+ * Bước 3: Các lần tiếp theo chạy chương trình chỉ cần chạy file *pong.sh*.
 
 
 ### 2. Ý TƯỞNG VÀ MÔ TẢ CHUNG
@@ -23,12 +24,12 @@
 ### 3. CÁC CHỨC NĂNG
 #### *(Lưu ý: Chức năng của các nút bấm giống tên gọi của nó)*
 * **Menu chính:**
-  Gồm 3 nút bấm: Chơi đơn, Chơi hai người và Thoát trò chơi.
+  Gồm 3 nút bấm: *Chơi đơn*, *Chơi hai người* và *Thoát trò chơi*.
 * **Menu tạm dừng:**
-  - Gồm 2 nút bấm: Tiếp tục và Về menu chính.
+  - Gồm 2 nút bấm: *Tiếp tục* và *Về menu chính*.
   - Xuất hiện khi trò chơi đang tạm dừng giữa màn chơi.  
 * **Màn chơi:**
-  - Gồm 2 chế đọ: Chơi đơn và Chơi hai người.
+  - Gồm 2 chế đọ: *Chơi đơn* và *Chơi hai người*.
   - Ở lượt chơi đầu tiên, người chơi bên phải phát bóng trước. Sau đó người thắng một lượt chơi sẽ được phát bóng ở lượt tiếp theo.
   - Góc phát bóng ở mỗi lượt chơi là ngẫu nhiên.
   - Tốc độ di chuyển của bóng tăng đều sau mỗi lượt chơi, tốc độ di chuyển của hai tấm ván tăng đều sau mỗi 5 lượt chơi. 

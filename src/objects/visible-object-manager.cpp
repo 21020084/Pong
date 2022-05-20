@@ -59,17 +59,6 @@ namespace pong {
       ++itr;
     }
 
-    // /// Check if the ball is out of bounds
-    // VisibleObject *tmp = this->getObject("O_ball");
-    // if (stateSignal == 'T') {
-    //   tmp = this->getObject("T_ball");
-    // }
-
-    // if (dynamic_cast<Ball*> (tmp)) {
-    //   Ball *ball = dynamic_cast<Ball*> (tmp);
-    //   if (ball->isOut()) return;
-    // }
-
     /// Process collision between objects.  
     auto originItr = this->objects.begin();
     while (originItr != this->objects.end()) {

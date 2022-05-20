@@ -27,9 +27,7 @@ namespace pong {
 
     this->data->cursor.loadFromSystem(sf::Cursor::Arrow);
     this->data->window.setMouseCursor(this->data->cursor);
-    // /// Remove all objects of the previous state
-    // this->data->visibleObjectManager.clearObjects();
-
+    
 
     /*******************Initialize the game objects****************************/
     Field *field = new Field(Game::data);

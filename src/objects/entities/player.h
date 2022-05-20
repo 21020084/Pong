@@ -18,7 +18,6 @@ namespace pong {
       bool addSpeed(float speed);
 
     private:
-      // GameDataRef data;
       bool ai;
       bool left;
       float freezeTimer;

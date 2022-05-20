@@ -9,12 +9,12 @@ namespace pong {
     this->speed = BALL_BASE_SPEED;
     this->maxSpeed = BALL_MAX_SPEED;
     this->angle = 1.0f * (rand() % 161) + 100;
-    // this->angle = -90.0f;
     this->constraints = constraints;
     this->is_out = false;
     this->freezeTimer = FREEZING_TIME;
     this->collidedWith = RIGHT;
 
+    /****************Loading sounds****************/
     this->ballOutSoundBuffer.loadFromFile("assets/ball_out.wav");
     this->ballOutSound.setBuffer(this->ballOutSoundBuffer);
     this->ballOutSound.setVolume(30);
@@ -22,12 +22,12 @@ namespace pong {
     this->ballHitSoundBuffer.resize(2);
     this->ballHitSoundBuffer[0].loadFromFile("assets/ball_hit(0).wav");
     this->ballHitSoundBuffer[1].loadFromFile("assets/ball_hit(1).wav");
-    // this->ballHitSound.setBuffer(this->ballHitSoundBuffer[0]);
 
     this->winningSoundBuffer.loadFromFile("assets/winning.wav");
     this->winningSound.setBuffer(this->winningSoundBuffer);
     this->losingSoundBuffer.loadFromFile("assets/losing.wav");
     this->losingSound.setBuffer(this->losingSoundBuffer);
+    /**********************************************/
   }
 
   void Ball::resetPosition(VisibleObject *player1, VisibleObject *player2) {
