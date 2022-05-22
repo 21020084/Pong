@@ -1,1 +1,1 @@
-mingw32-make
+mingw64/bin/mingw32-make
