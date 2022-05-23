@@ -8,8 +8,8 @@
  * Bước 1: Đồng bộ code về máy của bạn, sử dụng lệnh:
       **git clone https://github.com/21020084/Pong.git**.
  * Bước 2: Vào đường link *https://drive.google.com/file/d/1fQiOEtSXu8Furb8clbEqDjzjwq2VJMIo/view?usp=sharing* tải file *.zip*, sau đó giải nén đến thư mục *pong* vừa được đồng bộ về máy.
- * Bước 2: Click chuột để chạy file *pong.sh* và đợi chương trình biên dịch xong.
- * Bước 3: Các lần tiếp theo chạy chương trình chỉ cần chạy file *pong.sh*.
+ * Bước 3: Click chuột để chạy file *pong.sh* và đợi chương trình biên dịch xong.
+ * Bước 4: Các lần tiếp theo chạy chương trình chỉ cần chạy file *pong.sh*.
 
 
 ### 2. Ý TƯỞNG VÀ MÔ TẢ CHUNG
