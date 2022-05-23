@@ -40,6 +40,9 @@ namespace pong {
       bool m_hasEntered;
       bool m_hasClosed;
       StateID m_ID;
+      sf::Clock clock;
+      sf::Texture transitionTexture;
+      sf::Sprite transitionSprite;
   };
 }
 

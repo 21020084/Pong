@@ -191,6 +191,7 @@ namespace pong {
     this->data->visibleObjectManager.draw('T');
     this->data->window.draw(this->scoreText1);
     this->data->window.draw(this->scoreText2);
+    this->data->window.draw(this->transitionSprite);
     this->data->window.display();
   }
 }

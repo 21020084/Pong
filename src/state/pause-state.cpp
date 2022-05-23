@@ -65,6 +65,7 @@ namespace pong {
     this->data->window.clear();
     this->data->window.draw(m_backgroundSprite);
     this->data->visibleObjectManager.draw('P');
+    this->data->window.draw(this->transitionSprite);
     this->data->window.display();
   }
 }

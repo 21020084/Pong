@@ -13,6 +13,10 @@
 #define PLAYER_BASE_SPEED 16.0f
 #define PLAYER_MAX_SPEED 48.0f
 
+/// Freezing time
 #define FREEZING_TIME 1.55f
+
+/// Transition time
+#define TRANSITION_TIME 0.5f
 
 #endif // DEFINITION_H

@@ -20,7 +20,6 @@ namespace pong {
     private:
       sf::Texture texture;
       sf::Sprite sprite;
-      sf::Clock clock;
   };
 }
 

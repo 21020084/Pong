@@ -65,6 +65,7 @@ namespace pong {
   void MenuState::render() {
     this->data->window.draw(m_backgroundSprite);
     this->data->visibleObjectManager.draw('M');
+    this->data->window.draw(this->transitionSprite);
     this->data->window.display();
   }
 }
