@@ -17,6 +17,6 @@
 #define FREEZING_TIME 1.55f
 
 /// Transition time
-#define TRANSITION_TIME 0.25f
+#define TRANSITION_TIME 0.2f
 
 #endif // DEFINITION_H
