@@ -12,16 +12,22 @@ namespace pong {
     return this->m_ID;
   }
 
-  bool GameState::hasEntered() {
-    return this->m_hasEntered;
+  bool GameState::added() {
+    return this->m_added;
   }
 
-  bool GameState::hasClosed() {
-    return this->m_hasClosed;
+  bool GameState::removed() {
+    return this->m_removed;
   }
 
-  void GameState::enter() {
-    this->m_hasEntered = true;
+  void GameState::add() {
+    this->m_added = true;
+  }
+
+  void GameState::entering() {
+    if (this->m_entered) {
+      return;
+    }
     if (this->m_ID == SplashScreen) return;
     this->clock.restart();
     
@@ -30,10 +36,14 @@ namespace pong {
                             255 * (1 - this->clock.getElapsedTime().asSeconds() / TRANSITION_TIME)));
       this->render();
     };
+    this->m_entered = true;
   }
 
-  void GameState::close() {
-    this->m_hasClosed = true;
+  void GameState::remove() {
+    this->m_removed = true;
+  }
+
+  void GameState::exiting() {
     if (this->m_ID == SplashScreen) return;
     this->clock.restart();
 
@@ -42,10 +52,12 @@ namespace pong {
                             255 * this->clock.getElapsedTime().asSeconds() / TRANSITION_TIME));
       this->render();
     };
+    this->m_entered = false;
   }
 
   void GameState::setNewState() {
-    this->m_hasEntered = false;
-    this->m_hasClosed = false;
+    this->m_added = false;
+    this->m_removed = false;
+    this->m_entered = false;
   }
 }

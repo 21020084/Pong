@@ -16,6 +16,7 @@ namespace pong {
       int processStateChange();
       void addState(StateID stateID);
       void switchTo(StateID stateID);
+      void exitCurrentState();
       void closeCurrentState();
       void clearToGoState();
       void handleInput();

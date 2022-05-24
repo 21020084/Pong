@@ -106,6 +106,7 @@ namespace pong {
       }
       /// Check if the user wants to pause the game
       if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
+        this->data->stateManager.exitCurrentState();
         this->data->stateManager.addState(Pause);
       }
       this->data->visibleObjectManager.handleInput(event, 'O');

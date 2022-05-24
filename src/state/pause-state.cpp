@@ -35,12 +35,12 @@ namespace pong {
     while (this->data->window.pollEvent(event)) {
       /// If the user wants to quit the game
       if (event.type == sf::Event::Closed) {
-        this->m_hasClosed  = true;
+        this->m_removed  = true;
         this->data->window.close();
         continue;
       }
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-        this->m_hasClosed  = true;
+        this->m_removed  = true;
         this->data->stateManager.closeCurrentState();
         continue;
       }

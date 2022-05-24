@@ -42,7 +42,7 @@ namespace pong {
       /// If the user wants to quit the game
       if (event.type == sf::Event::Closed ||
           sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-        this->m_hasClosed  = true;
+        this->m_removed  = true;
         this->data->window.close();
       }
     }

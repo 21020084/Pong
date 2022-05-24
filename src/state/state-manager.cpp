@@ -27,18 +27,24 @@ namespace pong {
     }
     this->togoStateID = None;
 
-    if (!this->states.empty() && this->states.top()->hasClosed()) {
+    if (!this->states.empty() && this->states.top()->removed()) {
+      // this->states.top()->exiting();
       delete this->states.top();
       this->states.pop();
     }
-    if (this->newState) {
+
+    if (this->newState != nullptr) {
       if (this->newState->init() != 0) {
         return -1;
       }
-      this->newState->enter();
+      this->newState->add();
+      // this->newState->entering();
       this->states.push(this->newState);
       this->newState = nullptr;
     }
+
+    this->states.top()->entering();
+
     return 0;
   }
   //////////////////////////////////////////////////////////////////////////////
@@ -74,9 +80,14 @@ namespace pong {
   void StateManager::switchTo(StateID stateID) {
     this->togoStateID = stateID;
   }
-
+  
   void StateManager::closeCurrentState() {
-    this->states.top()->close();
+    this->states.top()->exiting();
+    this->states.top()->remove();
+  }
+
+  void StateManager::exitCurrentState() {
+    this->states.top()->exiting();
   }
 
   void StateManager::clearToGoState() {

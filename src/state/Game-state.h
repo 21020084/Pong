@@ -29,16 +29,19 @@ namespace pong {
       virtual void render() = 0;
 
       StateID getID();
-      bool hasEntered();
-      bool hasClosed();
+      bool added();
+      bool removed();
       void setNewState();
-      void enter();
-      void close();
+      void add();
+      void entering();
+      void remove();
+      void exiting();
 
     protected:
       GameDataRef data;
-      bool m_hasEntered;
-      bool m_hasClosed;
+      bool m_added;
+      bool m_entered;
+      bool m_removed;
       StateID m_ID;
       sf::Clock clock;
       sf::Texture transitionTexture;

@@ -9,6 +9,7 @@ namespace pong {
       int x = event.mouseButton.x;
       int y = event.mouseButton.y;
       if (this->getBoundingBox().contains(x, y)) {
+        this->data->stateManager.exitCurrentState();
         this->data->stateManager.addState(OnePlayer);
       }
     }
