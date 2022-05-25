@@ -6,7 +6,7 @@ namespace pong {
 
   void Game::run() {
     data->window.create(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Pong", sf::Style::Close | sf::Style::Resize);
-    data->window.setFramerateLimit(60);
+    data->window.setFramerateLimit(FPS);
 
     float newTime, frameTime, interpolation;
     float currentTime = data->clock.getElapsedTime().asSeconds();
@@ -25,8 +25,8 @@ namespace pong {
       newTime = data->clock.getElapsedTime().asSeconds();
       frameTime = newTime - currentTime;
 
-      if (frameTime > 1.0f / 60) {
-        frameTime = 1.0f / 60;
+      if (frameTime > 0.25f) {
+        frameTime = 0.25f;
       }
 
       currentTime = newTime;

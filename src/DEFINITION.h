@@ -16,7 +16,10 @@
 /// Freezing time
 #define FREEZING_TIME 1.55f
 
+/// Number of frame per second 
+#define FPS 90
+
 /// Transition time
-#define TRANSITION_TIME 0.2f
+#define TRANSITION_TIME 0.1f
 
 #endif // DEFINITION_H

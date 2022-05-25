@@ -41,7 +41,7 @@ namespace pong {
       }
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
         this->m_removed  = true;
-        this->data->stateManager.closeCurrentState();
+        this->data->stateManager.removeCurrentState();
         continue;
       }
     }

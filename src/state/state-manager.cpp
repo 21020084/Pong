@@ -81,7 +81,7 @@ namespace pong {
     this->togoStateID = stateID;
   }
   
-  void StateManager::closeCurrentState() {
+  void StateManager::removeCurrentState() {
     this->states.top()->exiting();
     this->states.top()->remove();
   }

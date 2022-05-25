@@ -17,7 +17,7 @@ namespace pong {
       void addState(StateID stateID);
       void switchTo(StateID stateID);
       void exitCurrentState();
-      void closeCurrentState();
+      void removeCurrentState();
       void clearToGoState();
       void handleInput();
       void update(float elapsedTime);
