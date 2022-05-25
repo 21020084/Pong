@@ -63,6 +63,7 @@ namespace pong {
   }
 
   void MenuState::render() {
+    this->data->window.clear(sf::Color::White);
     this->data->window.draw(m_backgroundSprite);
     this->data->visibleObjectManager.draw('M');
     this->data->window.draw(this->transitionSprite);

@@ -62,7 +62,7 @@ namespace pong {
   }
 
   void PauseState::render() {
-    this->data->window.clear();
+    this->data->window.clear(sf::Color::White);
     this->data->window.draw(m_backgroundSprite);
     this->data->visibleObjectManager.draw('P');
     this->data->window.draw(this->transitionSprite);
